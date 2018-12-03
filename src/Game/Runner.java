@@ -14,10 +14,36 @@ public class Runner {
 
     public static void main(String[] args)
     {
-        Room[][] building = new Room[5][5];
+        Room[][] building= new Room[5][5];
+        Scanner in = new Scanner(System.in);
+        System.out.println("WELCOME TO THE ESCAPE ROOM");
+        System.out.println("I will devise a intricate room for you");
+        System.out.println("Let's start with your name...What's your name?");
+        String name = in.nextLine();
+
+        System.out.println("hElLo "+ name+ " Would you like to choose a difficulty or make a custom map?");
+        System.out.println("Please type 'd' for choosing a difficulty AND 'c' for custom map");
+        String boardChoice= in.nextLine();
+
+        if(boardChoice.equals("d")) {
+            System.out.println("Please select a difficulty by typing:");
+            System.out.println("'n' for a 5x5 layout | 'm' for a 10x10 layout | 'h' for a 15x15 layout");
+            String difficulty = in.nextLine();
+            Board map = new Board(difficulty);
+            building= map.getBoard();
+        }
+
+        if(boardChoice.equals("c")) {
+            System.out.println("Please give me the length of the map. Don't make it >20");
+            int length= in.nextInt();
+            System.out.println("Please give me the width of the map. Don't make it >20");
+            int width= in.nextInt();
+            Board map = new Board(length, width);
+            building= map.getBoard();
+        }
 
         //Fill the building with normal rooms
-        for (int x = 0; x<building.length; x++)
+        for (int x = 0; x< building.length; x++)
         {
             for (int y = 0; y < building[x].length; y++)
             {
@@ -36,9 +62,8 @@ public class Runner {
 
 
         //Setup player 1 and the input scanner
-        Person player1 = new Person("FirstName", "FamilyName", 0,0);
+        Person player1 = new Person( name,0,0);
         building[0][0].enterRoom(player1);
-        Scanner in = new Scanner(System.in);
         while(gameOn)
         {
             System.out.println("Where would you like to move? (Choose N, S, E, W)");
@@ -79,7 +104,6 @@ public class Runner {
             result=result+"\n";
         }
         return result;
-
     }
 
     /**
