@@ -1,6 +1,7 @@
 package Game;
 
 import People.Person;
+import Rooms.ItemRoom;
 import Rooms.Room;
 import Rooms.RoomInConstruction;
 import Rooms.WinningRoom;
@@ -42,12 +43,12 @@ public class Runner {
             building= map.getBoard();
         }
 
-        //Fill the building with normal rooms
+        //Fill the building with item rooms
         for (int x = 0; x< building.length; x++)
         {
             for (int y = 0; y < building[x].length; y++)
             {
-                building[x][y] = new Room(x,y);
+                building[x][y] = new ItemRoom(x,y);
             }
         }
 

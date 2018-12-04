@@ -12,6 +12,10 @@ public class Board
     private int length;
     private int width;
 
+    /**
+     *
+     * @param difficulty- Creating a board based on preset difficulties
+     */
     public Board (String difficulty)
     {
         this.difficulty=difficulty;
@@ -31,6 +35,11 @@ public class Board
         }
     }
 
+    /**
+     *
+     * @param length- User input- length of board
+     * @param width- User input - width of board
+     */
 
     public Board (int length, int width)
     {
@@ -42,6 +51,18 @@ public class Board
         return this.map;
     }
 
-
+    public void print()
+    {
+        String row ="";
+        for ( int i=0; i< this.map.length; i++)
+        {
+            row="";
+            for (int j =0; j<map[i].length; j++)
+            {
+                row+=this.map[i][j].toString();
+            }
+            System.out.println(row);
+        }
+    }
 
 }

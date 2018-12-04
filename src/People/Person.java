@@ -1,12 +1,14 @@
 package People;
 
+import java.util.ArrayList;
+
 /**
  * Person represents the player as they move through the game.
  */
 public class Person {
     String Name;
     int xLoc, yLoc;
-
+    ArrayList<String> inventory;
 
     public int getxLoc() {
         return xLoc;
@@ -24,7 +26,12 @@ public class Person {
         this.yLoc = yLoc;
     }
 
-    public Person (String Name, int xLoc, int yLoc)
+    public ArrayList<String> getInventory()
+    {
+        return this.inventory;
+    }
+
+    public Person (String Name, int xLoc, int yLoc,)
     {
         this.Name = Name;
         this.xLoc = xLoc;

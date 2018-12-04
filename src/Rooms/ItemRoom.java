@@ -2,21 +2,23 @@ package Rooms;
 
 import People.Person;
 
-public abstract class Room {
+public class ItemRoom extends Room {
     Person occupant;
-    int xLoc, yLoc;
+    int xLoc,yLoc;
 
-    public Room(int x, int y) {
-        xLoc = x;
-        yLoc = y;
+    //needs an item
+
+    public ItemRoom(int x, int y)
+    {
+     super(x,y);
     }
 
     /**
      * Method controls the results when a person enters this room.
-     *
      * @param x the Person entering
      */
-    public void enterRoom(Person x) {
+    public void enterRoom(Person x)
+    {
         System.out.println("You enter a plain old room");
         occupant = x;
         x.setxLoc(this.xLoc);
@@ -25,15 +27,16 @@ public abstract class Room {
 
     /**
      * Removes the player from the room.
-     *
      * @param x
      */
-    public void leaveRoom(Person x) {
+    public void leaveRoom(Person x)
+    {
         occupant = null;
     }
-
     public String toString()
     {
+
         return
     }
+
 }
