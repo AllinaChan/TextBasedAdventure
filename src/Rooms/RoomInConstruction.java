@@ -5,10 +5,11 @@ import People.Person;
 public class RoomInConstruction extends Room
 {	Person occupant;
     int xLoc,yLoc;
-
+    String contain;
     public RoomInConstruction(int x, int y)
     {
         super(x,y);
+        this.contain="[...]";
     }
 
     /**
@@ -29,6 +30,11 @@ public class RoomInConstruction extends Room
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
+        contain= "[X]";
+    }
+
+    public String getContain() {
+        return contain;
     }
 
     public void leaveRoom(Person x)
@@ -38,6 +44,6 @@ public class RoomInConstruction extends Room
     public String toString()
     {
 
-        return
+        return getContain();
     }
 }

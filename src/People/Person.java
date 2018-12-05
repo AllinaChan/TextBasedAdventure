@@ -31,7 +31,7 @@ public class Person {
         return this.inventory;
     }
 
-    public Person (String Name, int xLoc, int yLoc,)
+    public Person (String Name, int xLoc, int yLoc)
     {
         this.Name = Name;
         this.xLoc = xLoc;

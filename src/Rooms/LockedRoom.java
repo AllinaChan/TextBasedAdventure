@@ -4,11 +4,15 @@ import People.Person;
 
 public class LockedRoom extends Room {
     Person occupant;
-    int xLoc,yLoc;int id;
+    int xLoc,yLoc;
+    int id;
+    String contain;
+    //A lock that would have a id similar to the key
     public LockedRoom(int x, int y, int id)
     {
         super(x,y);
         this.id=id;
+        this.contain="[L]";
     }
 
     /**
@@ -21,8 +25,13 @@ public class LockedRoom extends Room {
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
+        contain= "[X]";
     }
 
+
+    public String getContain() {
+        return contain;
+    }
     /**
      * Removes the player from the room.
      * @param x
@@ -35,7 +44,7 @@ public class LockedRoom extends Room {
     @Override
     public String toString()
     {
-        return
+        return getContain();
     }
 
 }

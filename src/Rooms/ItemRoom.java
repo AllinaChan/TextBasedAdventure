@@ -5,12 +5,13 @@ import People.Person;
 public class ItemRoom extends Room {
     Person occupant;
     int xLoc,yLoc;
-
+    String contain;
     //needs an item
 
     public ItemRoom(int x, int y)
     {
      super(x,y);
+     this.contain="[I]";
     }
 
     /**
@@ -19,10 +20,15 @@ public class ItemRoom extends Room {
      */
     public void enterRoom(Person x)
     {
-        System.out.println("You enter a plain old room");
+        System.out.println("You enter room with some items");
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
+        contain= "[X]";
+    }
+
+    public String getContain() {
+        return contain;
     }
 
     /**
@@ -32,11 +38,11 @@ public class ItemRoom extends Room {
     public void leaveRoom(Person x)
     {
         occupant = null;
+        contain="[I]";
     }
     public String toString()
     {
-
-        return
+        return getContain();
     }
 
 }

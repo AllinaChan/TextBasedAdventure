@@ -1,6 +1,7 @@
 package Game;
 
 import People.Person;
+import Game.Board;
 import Rooms.ItemRoom;
 import Rooms.Room;
 import Rooms.RoomInConstruction;
@@ -10,102 +11,80 @@ import java.util.Scanner;
 
 public class Runner {
 
-
     private static boolean gameOn = true;
 
-    public static void main(String[] args)
-    {
-        Room[][] building= new Room[5][5];
+    public static void main(String[] args) {
+        boolean initial = false;
+        String difficulty="";
+        int length=0;
+        int width=0;
+        Board map = new Board(1, 1);
         Scanner in = new Scanner(System.in);
         System.out.println("WELCOME TO THE ESCAPE ROOM");
         System.out.println("I will devise a intricate room for you");
         System.out.println("Let's start with your name...What's your name?");
         String name = in.nextLine();
 
-        System.out.println("hElLo "+ name+ " Would you like to choose a difficulty or make a custom map?");
+        System.out.println("hElLo " + name + " Would you like to choose a difficulty or make a custom map?");
         System.out.println("Please type 'd' for choosing a difficulty AND 'c' for custom map");
-        String boardChoice= in.nextLine();
+        String boardChoice = in.nextLine();
 
-        if(boardChoice.equals("d")) {
-            System.out.println("Please select a difficulty by typing:");
-            System.out.println("'n' for a 5x5 layout | 'm' for a 10x10 layout | 'h' for a 15x15 layout");
-            String difficulty = in.nextLine();
-            Board map = new Board(difficulty);
-            building= map.getBoard();
+        if (boardChoice.equals("d")) {
+            while(!difficulty.equals("e")&&!difficulty.equals("E")&&!difficulty.equals("m")&&!difficulty.equals("M")&&!difficulty.equals("h")&&!difficulty.equals("H")) {
+                System.out.println("Please select a difficulty by typing:");
+                System.out.println("'e' for a 5x5 layout | 'm' for a 10x10 layout | 'h' for a 15x15 layout");
+                difficulty = in.nextLine();
+                map = new Board(difficulty);
+            }
         }
 
-        if(boardChoice.equals("c")) {
-            System.out.println("Please give me the length of the map. Don't make it >20");
-            int length= in.nextInt();
-            System.out.println("Please give me the width of the map. Don't make it >20");
-            int width= in.nextInt();
-            Board map = new Board(length, width);
-            building= map.getBoard();
+        if (boardChoice.equals("c")) {
+            while(length==0 && width==0) {
+                System.out.println("Please give me the length of the map. Don't make it >50");
+                length = in.nextInt();
+                System.out.println("Please give me the width of the map. Don't make it >50");
+                width = in.nextInt();
+                map = new Board(length, width);
+            }
         }
 
-        //Fill the building with item rooms
-        for (int x = 0; x< building.length; x++)
-        {
-            for (int y = 0; y < building[x].length; y++)
-            {
-                building[x][y] = new ItemRoom(x,y);
+        //Fill the map.getBoard() with item rooms
+        for (int x = 0; x < map.getBoard().length; x++) {
+            for (int y = 0; y < map.getBoard()[x].length; y++) {
+                map.getBoard()[x][y] = new ItemRoom(x, y);
             }
         }
 
         //Create a random winning room.
-        int x = (int)(Math.random()*building.length);
-        int y = (int)(Math.random()*building.length);
-        building[x][y] = new WinningRoom(x, y);
+        int x = (int) (Math.random() * map.getBoard().length);
+        int y = (int) (Math.random() * map.getBoard().length);
+        map.getBoard()[x][y] = new WinningRoom(x, y);
 
-        int z = (int)(Math.random()*building.length);
-        int a = (int)(Math.random()*building.length);
-        building[x][y] = new RoomInConstruction(z, a);
+        int z = (int) (Math.random() * map.getBoard().length);
+        int a = (int) (Math.random() * map.getBoard().length);
+        map.getBoard()[x][y] = new RoomInConstruction(z, a);
 
 
         //Setup player 1 and the input scanner
-        Person player1 = new Person( name,0,0);
-        building[0][0].enterRoom(player1);
-        while(gameOn)
-        {
-            System.out.println("Where would you like to move? (Choose N, S, E, W)");
-            String move = in.nextLine();
-            if(validMove(move, player1, building))
-            {
-                System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
-                System.out.println(map(player1.getxLoc(),player1.getyLoc()));
+        Person player1 = new Person(name, 0, 0);
+        initial = true;
+        map.print();
+        if (initial) {
+            map.getBoard()[0][0].enterRoom(player1);
+            while (gameOn) {
+                System.out.println("Where would you like to move? (Choose N, S, E, W)");
+                String move = in.nextLine();
+                if (validMove(move, player1, map.getBoard())) {
+                    System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
+                    map.print();
+                } else {
+                    System.out.println("Please choose a valid move.");
+                }
             }
-            else {
-                System.out.println("Please choose a valid move.");
-            }
-
-
         }
         in.close();
     }
 
-    public static String map(int x, int y)
-    {
-        String[][] map = new String[5][5];
-        for (int i = 0; i<map.length; i++ )
-        {
-            for (int j =0; j< map[i].length; j++)
-            {
-                map[i][j]="O";
-            }
-        }
-        map[x][y]= "X";
-
-        String result="";
-        for (int i = 0; i<map.length; i++ )
-        {
-            for (int j =0; j< map[i].length; j++)
-            {
-                result = result+map[i][j];
-            }
-            result=result+"\n";
-        }
-        return result;
-    }
 
     /**
      * Checks that the movement chosen is within the valid game map.
@@ -173,6 +152,10 @@ public class Runner {
     public static void gameOff()
     {
         gameOn = false;
+    }
+    public static void gameOn()
+    {
+        gameOn = true;
     }
 
 

@@ -34,6 +34,6 @@ public abstract class Room {
 
     public String toString()
     {
-        return
+        return "[ ]";
     }
 }

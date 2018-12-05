@@ -53,15 +53,15 @@ public class Board
 
     public void print()
     {
-        String row ="";
-        for ( int i=0; i< this.map.length; i++)
+        String result="";
+        for (int i = 0; i<map.length; i++ )
         {
-            row="";
-            for (int j =0; j<map[i].length; j++)
+            result="";
+            for (int j =0; j< map[i].length; j++)
             {
-                row+=this.map[i][j].toString();
+                result = result+this.map[i][j].toString();
             }
-            System.out.println(row);
+            System.out.println(result);
         }
     }
 
