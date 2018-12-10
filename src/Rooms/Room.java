@@ -22,7 +22,6 @@ public abstract class Room {
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
     }
-
     /**
      * Removes the player from the room.
      *

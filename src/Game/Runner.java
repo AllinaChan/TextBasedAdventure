@@ -18,16 +18,23 @@ public class Runner {
         String difficulty="";
         int length=0;
         int width=0;
-        Board map = new Board(1, 1);
+        Board map = new Board(0, 0);
         Scanner in = new Scanner(System.in);
         System.out.println("WELCOME TO THE ESCAPE ROOM");
         System.out.println("I will devise a intricate room for you");
         System.out.println("Let's start with your name...What's your name?");
         String name = in.nextLine();
+        String boardChoice="";
 
-        System.out.println("hElLo " + name + " Would you like to choose a difficulty or make a custom map?");
-        System.out.println("Please type 'd' for choosing a difficulty AND 'c' for custom map");
-        String boardChoice = in.nextLine();
+        while(!boardChoice.equals("d") || !boardChoice.equals("c")) {
+            if(boardChoice.equals("d")||boardChoice.equals("c"))
+            {
+                break;
+            }
+            System.out.println("hElLo " + name + " Would you like to choose a difficulty or make a custom map?");
+            System.out.println("Please type 'd' for choosing a difficulty AND 'c' for custom map");
+            boardChoice = in.nextLine();
+        }
 
         if (boardChoice.equals("d")) {
             while(!difficulty.equals("e")&&!difficulty.equals("E")&&!difficulty.equals("m")&&!difficulty.equals("M")&&!difficulty.equals("h")&&!difficulty.equals("H")) {
@@ -47,6 +54,8 @@ public class Runner {
                 map = new Board(length, width);
             }
         }
+
+
 
         //Fill the map.getBoard() with item rooms
         for (int x = 0; x < map.getBoard().length; x++) {

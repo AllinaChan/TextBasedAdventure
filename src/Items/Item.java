@@ -11,4 +11,5 @@ public abstract class Item {
         this.x =x;
         this.id=id;
     }
+    public abstract String getID();
 }

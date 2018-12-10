@@ -3,16 +3,18 @@ package Rooms;
 import People.Person;
 
 public class LockedRoom extends Room {
+
     Person occupant;
     int xLoc,yLoc;
     int id;
     String contain;
-    //A lock that would have a id similar to the key
+   int lockID;
     public LockedRoom(int x, int y, int id)
     {
         super(x,y);
         this.id=id;
         this.contain="[L]";
+        this.lockID=getNewID();
     }
 
     /**
@@ -21,13 +23,23 @@ public class LockedRoom extends Room {
      */
     public void enterRoom(Person x)
     {
-        System.out.println("You enter a plain old room");
+
+        System.out.println("You need a key for this room");
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
         contain= "[X]";
     }
 
+    public static int getNewID()
+    {
+        return 10;
+    }
+
+
+    public String getItem() {
+        return  "LockedRoom ID: "+Integer.toString(id);
+    }
 
     public String getContain() {
         return contain;

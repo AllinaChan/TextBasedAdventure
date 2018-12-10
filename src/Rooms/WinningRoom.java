@@ -26,6 +26,7 @@ public class WinningRoom extends Room
         Runner.gameOff();
     }
 
+
     public String getContain() {
         return contain;
     }
