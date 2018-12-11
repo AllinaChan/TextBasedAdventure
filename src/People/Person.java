@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Person {
     String Name;
     int xLoc, yLoc;
-    ArrayList<String> inventory;
+    ArrayList<String> keys;
 
     public int getxLoc() {
         return xLoc;
@@ -26,10 +26,16 @@ public class Person {
         this.yLoc = yLoc;
     }
 
-    public ArrayList<String> getInventory()
+    public ArrayList<String> getKeys()
     {
-        return this.inventory;
+        return this.keys;
     }
+
+    public void addItem(String key)
+    {
+        this.keys.add(key);
+    }
+
 
     public Person (String Name, int xLoc, int yLoc)
     {
@@ -37,6 +43,7 @@ public class Person {
         this.xLoc = xLoc;
         this.yLoc = yLoc;
     }
+    public ArrayList<>
 
 
 }

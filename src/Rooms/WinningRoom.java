@@ -6,6 +6,8 @@ import People.Person;
 public class WinningRoom extends Room
 {
     String contain;
+    int xLoc,yLoc;
+
     public WinningRoom(int x, int y) {
         super(x, y);
         this.contain="[ ]";

@@ -3,10 +3,10 @@ package Items;
 import People.Person;
 
 public abstract class Item {
-    int id;
+    String id;
     Person x;
 
-    public Item(Person x,int id)
+    public Item(Person x,String id)
     {
         this.x =x;
         this.id=id;

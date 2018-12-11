@@ -1,20 +1,21 @@
 package Rooms;
 
+import Game.Constants;
 import People.Person;
 
 public class LockedRoom extends Room {
 
     Person occupant;
     int xLoc,yLoc;
-    int id;
+    String id;
     String contain;
-   int lockID;
-    public LockedRoom(int x, int y, int id)
+   String lockID;
+    public LockedRoom(int x, int y)
     {
         super(x,y);
-        this.id=id;
+        this.id=Constants.getNextRoomID();
         this.contain="[L]";
-        this.lockID=getNewID();
+        this.lockID= Constants.getNextLockID();
     }
 
     /**
@@ -36,10 +37,6 @@ public class LockedRoom extends Room {
         return 10;
     }
 
-
-    public String getItem() {
-        return  "LockedRoom ID: "+Integer.toString(id);
-    }
 
     public String getContain() {
         return contain;

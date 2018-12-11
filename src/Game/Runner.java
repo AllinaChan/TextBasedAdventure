@@ -1,10 +1,9 @@
 package Game;
 
 import People.Person;
-import Game.Board;
-import Rooms.ItemRoom;
+import Rooms.ItemKeyRoom;
 import Rooms.Room;
-import Rooms.RoomInConstruction;
+import Rooms.ClueRoom;
 import Rooms.WinningRoom;
 
 import java.util.Scanner;
@@ -60,18 +59,13 @@ public class Runner {
         //Fill the map.getBoard() with item rooms
         for (int x = 0; x < map.getBoard().length; x++) {
             for (int y = 0; y < map.getBoard()[x].length; y++) {
-                map.getBoard()[x][y] = new ItemRoom(x, y);
+                map.getBoard()[x][y] = new ItemKeyRoom(x, y);
             }
         }
 
-        //Create a random winning room.
-        int x = (int) (Math.random() * map.getBoard().length);
-        int y = (int) (Math.random() * map.getBoard().length);
-        map.getBoard()[x][y] = new WinningRoom(x, y);
+        //Create winning room.
+        map.getBoard()[width-1][length-1] = new WinningRoom(width-1, length-1);
 
-        int z = (int) (Math.random() * map.getBoard().length);
-        int a = (int) (Math.random() * map.getBoard().length);
-        map.getBoard()[x][y] = new RoomInConstruction(z, a);
 
 
         //Setup player 1 and the input scanner
