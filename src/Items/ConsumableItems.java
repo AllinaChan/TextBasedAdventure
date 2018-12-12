@@ -1,6 +1,8 @@
 package Items;
 
-public interface ConsumableItems {
-    public String getID();
+import People.Person;
 
+public interface ConsumableItems {
+    void use(Person x);
+    String getID();
 }

@@ -1,5 +1,7 @@
 package People;
 
+import Game.Position;
+
 import java.util.ArrayList;
 
 /**
@@ -31,9 +33,14 @@ public class Person {
         return this.keys;
     }
 
-    public void addItem(String key)
+    public void addKey(String key)
     {
         this.keys.add(key);
+    }
+
+    public void removeKey(String key)
+    {
+        this.keys.remove(key);
     }
 
 
@@ -43,7 +50,7 @@ public class Person {
         this.xLoc = xLoc;
         this.yLoc = yLoc;
     }
-    public ArrayList<>
+    public ArrayList<Position> 
 
 
 }

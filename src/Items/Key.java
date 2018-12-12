@@ -6,14 +6,17 @@ import People.Person;
 public class Key extends Item implements ConsumableItems{
 
     Person x;
-    String id= Constants.getNextKeyID();
+    String id=Constants.getNextKeyID();
 
-    public Key(Person x, String id)
+    public Key(Person x)
     {
-        super(x , id);
+        super(x);
     }
 
-
+    public void use(Person x)
+    {
+        x.removeKey(id);
+    }
     public String getID() {
         return this.id;
     }

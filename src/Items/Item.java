@@ -3,13 +3,11 @@ package Items;
 import People.Person;
 
 public abstract class Item {
-    String id;
     Person x;
 
-    public Item(Person x,String id)
+    public Item(Person x)
     {
         this.x =x;
-        this.id=id;
     }
     public abstract String getID();
 }
