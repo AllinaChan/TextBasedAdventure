@@ -1,18 +1,19 @@
 package Rooms;
 
 import Game.Constants;
+import Game.Position;
 import People.Person;
 
 public class LockedRoom extends Room {
 
     Person occupant;
-    int xLoc,yLoc;
+   Position position;
     String id;
     String contain;
    String lockID;
-    public LockedRoom(int x, int y)
+    public LockedRoom(Position position)
     {
-        super(x,y);
+        super(position);
         this.id=Constants.getNextRoomID();
         this.contain="[L]";
         this.lockID= Constants.getNextLockID();
@@ -27,8 +28,8 @@ public class LockedRoom extends Room {
 
         System.out.println("You need a key for this room");
         occupant = x;
-        x.setxLoc(this.xLoc);
-        x.setyLoc(this.yLoc);
+        x.setxLoc(this.position.getX());
+        x.setyLoc(this.position.getY());
         contain= "[X]";
     }
 

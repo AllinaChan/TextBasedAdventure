@@ -1,14 +1,14 @@
 package Rooms;
 
+import Game.Position;
 import People.Person;
 
 public abstract class Room {
     Person occupant;
-    int xLoc, yLoc;
+    Position position;
 
-    public Room(int x, int y) {
-        xLoc = x;
-        yLoc = y;
+    public Room(Position position) {
+       this.position=position;
     }
 
     /**
@@ -19,8 +19,8 @@ public abstract class Room {
     public void enterRoom(Person x) {
         System.out.println("You enter a plain old room");
         occupant = x;
-        x.setxLoc(this.xLoc);
-        x.setyLoc(this.yLoc);
+        x.setxLoc(this.position.getX());
+        x.setyLoc(this.position.getY());
     }
     /**
      * Removes the player from the room.

@@ -9,23 +9,23 @@ import java.util.ArrayList;
  */
 public class Person {
     String Name;
-    int xLoc, yLoc;
+    Position position;
     ArrayList<String> keys;
 
     public int getxLoc() {
-        return xLoc;
+        return position.getX();
     }
 
     public void setxLoc(int xLoc) {
-        this.xLoc = xLoc;
+        this.position.setX(xLoc);
     }
 
     public int getyLoc() {
-        return yLoc;
+        return position.getY();
     }
 
     public void setyLoc(int yLoc) {
-        this.yLoc = yLoc;
+        this.position.setY(yLoc);
     }
 
     public ArrayList<String> getKeys()
@@ -44,13 +44,9 @@ public class Person {
     }
 
 
-    public Person (String Name, int xLoc, int yLoc)
+    public Person (String Name, Position position)
     {
         this.Name = Name;
-        this.xLoc = xLoc;
-        this.yLoc = yLoc;
+        this.position=position;
     }
-    public ArrayList<Position> 
-
-
 }

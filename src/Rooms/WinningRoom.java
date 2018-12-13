@@ -1,15 +1,16 @@
 package Rooms;
 
+import Game.Position;
 import Game.Runner;
 import People.Person;
 
 public class WinningRoom extends Room
 {
     String contain;
-    int xLoc,yLoc;
+    Position position;
 
-    public WinningRoom(int x, int y) {
-        super(x, y);
+    public WinningRoom(Position position) {
+        super(position);
         this.contain="[ ]";
     }
 
@@ -21,8 +22,8 @@ public class WinningRoom extends Room
     public void enterRoom(Person x) {
 
         occupant = x;
-        x.setxLoc(this.xLoc);
-        x.setyLoc(this.yLoc);
+        x.setxLoc(this.position.getX());
+        x.setyLoc(this.position.getY());
         contain= "[X]";
         System.out.println("WHAT? HOW DID YOU GET HERE? IF you dare, try a different difficulty" );
         Runner.gameOff();

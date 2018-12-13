@@ -1,6 +1,7 @@
 package Rooms;
 
 import Game.Constants;
+import Game.Position;
 import People.Person;
 
 import java.util.ArrayList;
@@ -9,13 +10,13 @@ import java.util.Random;
 public class ClueRoom extends Room
 {
     Person occupant;
-    int xLoc,yLoc;
+    Position position;
     String contain;
     String id;
 
-    public ClueRoom(int x, int y)
+    public ClueRoom(Position position)
     {
-        super(x,y);
+        super(position);
         this.id= Constants.getNextRoomID();
         this.contain="[...]";
     }
@@ -27,8 +28,8 @@ public class ClueRoom extends Room
     public void enterRoom(Person x)
     {
         occupant = x;
-        x.setxLoc(this.xLoc);
-        x.setyLoc(this.yLoc);
+        x.setxLoc(this.position.getX());
+        x.setyLoc(this.position.getY());
         contain= "[X]";
         Scanner in = new Scanner(System.in);
          String response="";

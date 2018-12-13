@@ -6,7 +6,7 @@ public class Board
 {
     private Room[][] map;
     private String difficulty;
-    private int length;
+    private int height;
     private int width;
 
     /**
@@ -18,21 +18,21 @@ public class Board
         this.difficulty=difficulty;
         if (difficulty.equals("E")||difficulty.equals("e"))
         {
-            this.length=5;
+            this.height=5;
             this.width=5;
             this.map= new Room[5][5];
         }
 
         if (difficulty.equals("M")||difficulty.equals("m"))
         {
-            this.length=10;
+            this.height=10;
             this.width=10;
             this.map= new Room[10][10];
         }
 
         if (difficulty.equals("H")||difficulty.equals("h"))
         {
-            this.length=15;
+            this.height=15;
             this.width=15;
             this.map= new Room[15][15];
         }
@@ -44,11 +44,11 @@ public class Board
      * @param width- User input - width of board
      */
 
-    public Board (int length, int width)
+    public Board (int height, int width)
     {
-        this.length=length;
-        this.width=width;
-        this.map= new Room[length][width];
+        this.height=height;
+        this.width=height;
+        this.map= new Room[height][width];
     }
 
     public Room[][] getBoard()

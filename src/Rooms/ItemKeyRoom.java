@@ -1,6 +1,7 @@
 package Rooms;
 
 import Game.Constants;
+import Game.Position;
 import Items.Key;
 import People.Person;
 
@@ -9,14 +10,14 @@ import java.util.Scanner;
 
 public class ItemKeyRoom extends Room {
     Person occupant;
-    int xLoc,yLoc;
+    Position position;
     String contain;
     Key key;
     String id;
 
-    public ItemKeyRoom(int x, int y)
+    public ItemKeyRoom(Position position)
     {
-     super(x,y);
+     super(position);
      this.id=Constants.getNextRoomID();
      this.contain="[I]";
     }
@@ -29,8 +30,8 @@ public class ItemKeyRoom extends Room {
     {
         System.out.println("You enter room with a key");
         occupant = x;
-        x.setxLoc(this.xLoc);
-        x.setyLoc(this.yLoc);
+        x.setxLoc(this.position.getX());
+        x.setyLoc(this.position.getY());
         contain= "[X]";
 
 
@@ -43,7 +44,7 @@ public class ItemKeyRoom extends Room {
         }
         if(response.equals("yes"))
         {
-            x.addItem(key.getID());
+            x.addKey(key.getID());
         }
         if(response.equals("no"))
         {

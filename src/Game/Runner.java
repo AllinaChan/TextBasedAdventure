@@ -15,7 +15,7 @@ public class Runner {
     public static void main(String[] args) {
         boolean initial = false;
         String difficulty="";
-        int length=0;
+        int height=0;
         int width=0;
         Board map = new Board(0, 0);
         Scanner in = new Scanner(System.in);
@@ -45,12 +45,12 @@ public class Runner {
         }
 
         if (boardChoice.equals("c")) {
-            while(length==0 && width==0) {
+            while(height==0 && width==0) {
                 System.out.println("Please give me the length of the map. Don't make it >50");
-                length = in.nextInt();
+                height = in.nextInt();
                 System.out.println("Please give me the width of the map. Don't make it >50");
                 width = in.nextInt();
-                map = new Board(length, width);
+                map = new Board(height, width);
             }
         }
 
@@ -59,19 +59,20 @@ public class Runner {
         //Fill the map.getBoard() with item rooms
         for (int x = 0; x < map.getBoard().length; x++) {
             for (int y = 0; y < map.getBoard()[x].length; y++) {
-                map.getBoard()[x][y] = new ItemKeyRoom(x, y);
+                map.getBoard()[x][y] = new ItemKeyRoom( new Position (x,y));
             }
         }
 
         //Create winning room.
-        map.getBoard()[width-1][length-1] = new WinningRoom(width-1, length-1);
+        map.getBoard()[height+1][width+1] = new WinningRoom(new Position(height+1, width+1));
 
 
 
         //Setup player 1 and the input scanner
-        Person player1 = new Person(name, 0, 0);
+        Person player1 = new Person(name, new Position(0,0));
         initial = true;
         map.print();
+        System.out.println(player1==null);
         if (initial) {
             map.getBoard()[0][0].enterRoom(player1);
             while (gameOn) {
