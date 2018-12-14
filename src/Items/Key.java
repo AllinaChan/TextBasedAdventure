@@ -5,7 +5,6 @@ import People.Person;
 
 public class Key extends Item implements ConsumableItems{
 
-    Person x;
     String id=Constants.getNextKeyID();
 
     public Key(Person x)

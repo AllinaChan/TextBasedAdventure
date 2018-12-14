@@ -40,7 +40,7 @@ public class Board
 
     /**
      *
-     * @param length- User input- length of board
+     * @param height- User input- length of board
      * @param width- User input - width of board
      */
 
@@ -55,6 +55,12 @@ public class Board
     {
         return this.map;
     }
+
+    public void setBoard(int y, int x, Room room)
+    {
+        this.map[y][x] = room;
+    }
+
 
     public void print()
     {

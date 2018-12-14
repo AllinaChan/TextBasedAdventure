@@ -9,8 +9,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class ItemKeyRoom extends Room {
-    Person occupant;
-    Position position;
     String contain;
     Key key;
     String id;
@@ -20,6 +18,7 @@ public class ItemKeyRoom extends Room {
      super(position);
      this.id=Constants.getNextRoomID();
      this.contain="[I]";
+     this.key=key;
     }
 
     /**
@@ -39,6 +38,10 @@ public class ItemKeyRoom extends Room {
         String response="";
         while(!response.equals("yes")||!response.equals("no"))
         {
+            if(response.equals("yes")||response.equals("no"))
+            {
+                break;
+            }
             System.out.println("Do you want the key? 'yes' or 'no'?");
             response= in.nextLine();
         }

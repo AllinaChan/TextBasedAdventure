@@ -5,9 +5,6 @@ import Game.Position;
 import People.Person;
 
 public class LockedRoom extends Room {
-
-    Person occupant;
-   Position position;
     String id;
     String contain;
    String lockID;

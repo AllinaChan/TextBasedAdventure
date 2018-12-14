@@ -7,7 +7,6 @@ import People.Person;
 public class WinningRoom extends Room
 {
     String contain;
-    Position position;
 
     public WinningRoom(Position position) {
         super(position);

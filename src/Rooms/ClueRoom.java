@@ -9,8 +9,6 @@ import java.util.Scanner;
 import java.util.Random;
 public class ClueRoom extends Room
 {
-    Person occupant;
-    Position position;
     String contain;
     String id;
 

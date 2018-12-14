@@ -5,7 +5,7 @@ import Rooms.ItemKeyRoom;
 import Rooms.Room;
 import Rooms.ClueRoom;
 import Rooms.WinningRoom;
-
+import java.util.Random;
 import java.util.Scanner;
 
 public class Runner {
@@ -46,7 +46,7 @@ public class Runner {
 
         if (boardChoice.equals("c")) {
             while(height==0 && width==0) {
-                System.out.println("Please give me the length of the map. Don't make it >50");
+                System.out.println("Please give me the height of the map. Don't make it >50");
                 height = in.nextInt();
                 System.out.println("Please give me the width of the map. Don't make it >50");
                 width = in.nextInt();
@@ -62,9 +62,10 @@ public class Runner {
                 map.getBoard()[x][y] = new ItemKeyRoom( new Position (x,y));
             }
         }
-
+        System.out.println(height);
+        System.out.println(width);
         //Create winning room.
-        map.getBoard()[height+1][width+1] = new WinningRoom(new Position(height+1, width+1));
+    map.getBoard()[height+1][width+1] = new WinningRoom(new Position(height+1, width+1));
 
 
 
@@ -72,7 +73,6 @@ public class Runner {
         Person player1 = new Person(name, new Position(0,0));
         initial = true;
         map.print();
-        System.out.println(player1==null);
         if (initial) {
             map.getBoard()[0][0].enterRoom(player1);
             while (gameOn) {
@@ -88,6 +88,33 @@ public class Runner {
         }
         in.close();
     }
+
+    /**
+     * takes a y value from the last three rows of the map
+     * @param height- takes the height of the map
+     * @return- a random vertical placement of the room
+     */
+    public static int randomHeight(int height)
+    {
+        int l= height-1;
+        int g= height;
+        int f=height-2;
+
+
+        return
+    }
+
+    /**
+     * takes a x value from the last four columns of the map
+     * @param width- takes the width of the map
+     * @return- a random horizontal placement of the room
+     */
+
+    public static int randomWidth(int width)
+    {
+        return
+    }
+
 
 
     /**
