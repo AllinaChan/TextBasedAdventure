@@ -9,6 +9,7 @@ public class LockedRoom extends Room {
     String contain;
    String lockID;
    String broadcast;
+
     public LockedRoom(Position position)
     {
         super(position);
@@ -24,7 +25,12 @@ public class LockedRoom extends Room {
      */
     public void enterRoom(Person x)
     {
+        if(x.getKeys().contains(lockID))
+        {
 
+            System.out.println("You have unlocked the door!");
+
+        }
         System.out.println("You need a key for this room");
         occupant = x;
         x.setxLoc(this.position.getX());

@@ -8,19 +8,19 @@ import People.Person;
 import java.util.Random;
 import java.util.Scanner;
 
-public class ItemKeyRoom extends Room {
+public class RoomWithWerewolf extends Room {
     String contain;
     Key key;
     String id;
     String broadcast;
 
-    public ItemKeyRoom(Position position)
+    public RoomWithWerewolf(Position position)
     {
-     super(position);
-     this.id=Constants.getNextRoomID();
-     this.contain="[K]";
-     this.key= new Key();
-     this.broadcast="";
+        super(position);
+        this.id=Constants.getNextRoomID();
+        this.contain="[?]";
+        this.key= new Key();
+        this.broadcast="";
     }
 
     /**
@@ -47,7 +47,6 @@ public class ItemKeyRoom extends Room {
                 }
                 System.out.println("Do you want the key? 'yes' or 'no'?");
                 response = in.nextLine();
-                response=response.toLowerCase().trim();
             }
             if (response.equals("yes")) {
                 System.out.println(key.getID());

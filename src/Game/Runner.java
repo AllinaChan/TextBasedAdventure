@@ -19,9 +19,8 @@ public class Runner {
         ArrayList<Position> touchedPlaces= new ArrayList<>();
         Board map = new Board(0, 0);
         Scanner in = new Scanner(System.in);
-        System.out.println("WELCOME TO THE ESCAPE ROOM");
-        System.out.println("I will devise a intricate room for you");
-        System.out.println("Let's start with your name...What's your name?");
+        System.out.println("WELCOME TO THE MONSTER HUNT");
+        System.out.println("Hello adventurer, What's your name?");
         String name = in.nextLine();
         String boardChoice="";
 
@@ -33,6 +32,7 @@ public class Runner {
             System.out.println("hElLo " + name + " Would you like to choose a difficulty or make a custom map?");
             System.out.println("Please type 'd' for choosing a difficulty AND 'c' for custom map");
             boardChoice = in.nextLine();
+            boardChoice=boardChoice.toLowerCase().trim();
         }
 
         if (boardChoice.equals("d")) {
@@ -56,7 +56,33 @@ public class Runner {
             }
         }
 
+        String amountOfWolves="";
+        if(map.getHeight()<=5 && map.getWidth()<=5)
+        {
+            amountOfWolves="one";
+        }
+        else if(map.getHeight()<15 && map.getWidth()<15)
+        {
+            amountOfWolves="two";
+        }
+         else  if(map.getHeight()>=15 && map.getWidth()>=15)
+        {
+            amountOfWolves="three";
+        }
 
+        String gotIt="";
+         while(!gotIt.equals("yes")|| !gotIt.equals("no")) {
+             if(gotIt.equals("yes"))
+             {
+                 break;
+             }
+             System.out.println("Your goal of the game is to slay the Werewolf");
+             System.out.println("To do so, you would need the BOSS KEY by killing " + amountOfWolves + " wolf(s) with a sword");
+             System.out.println("However, a sword will not be able to damage the Werewolf...You would need both a GUN and a SILVER BULLET");
+             System.out.println("Got it? 'yes' or 'no'");
+             gotIt = in.nextLine();
+             gotIt = gotIt.toLowerCase().trim();
+         }
 
         //Fill the map.getBoard() with item rooms
         for (int x = 0; x < map.getBoard().length; x++) {
@@ -67,11 +93,10 @@ public class Runner {
         //Create winning room.
         int randWinH=randomHeight(height);
         int randWinW=randomWidth(width);
-        System.out.println(randWinH);
-        System.out.println(randWinW);
         map.getBoard()[randWinH][randWinW] = new WinningRoom(new Position(randWinH, randWinW));
 
 
+        //replaces (0,0)
         map.getBoard()[0][0]= new StartingRoom(new Position (0,0));
 
         //Setup player 1 and the input scanner
@@ -85,25 +110,42 @@ public class Runner {
         if (initial) {
             map.getBoard()[0][0].enterRoom(player1);
             while (gameOn) {
-                System.out.println("Where would you like to move? (Choose N, S, E, W)");
-                String move = in.nextLine();
-                Position oldPos= new Position(player1.getxLoc(), player1.getyLoc());
-                if (validMove(move, player1, map.getBoard())) {
-                    Room currentRoom= map.getRoom(player1.getxLoc(),player1.getyLoc());
-                    System.out.println(currentRoom.getBroadcast());
-                    if(currentRoom.getBroadcast().equals("sendBack"))
+                String choices = "";
+
+                while (!choices.equals("1") || !choices.equals("2")|| !choices.equals("3")) {
+                    if(choices.equals("1") || choices.equals("2") || choices.equals("3"))
                     {
-                        player1.setxLoc(oldPos.getX());
-                        player1.setyLoc(oldPos.getY());
+                        break;
                     }
-                    System.out.println(" ");
-                    System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
-                    touchedPlaces.add(new Position(player1.getxLoc(), player1.getyLoc()));
-                    System.out.println(touchedPlaces.get(0));
-                    map.print();
-                } else {
-                    System.out.println("Please choose a valid move.");
+                    System.out.println("What would you like to do?");
+                    System.out.println("Would you like to MOVE or CHECK YOUR INVENTORY? type '1' for Move or '2' for Inventory Check or '3' for Legend");
+                    choices = in.nextLine();
                 }
+                    if (choices.equals("1")) {
+                        System.out.println("Where would you like to move? (Choose N, S, E, W)");
+                        String move = in.nextLine();
+                        Position oldPos = new Position(player1.getxLoc(), player1.getyLoc());
+                        if (validMove(move, player1, map.getBoard())) {
+                            Room currentRoom = map.getRoom(player1.getxLoc(), player1.getyLoc());
+                            if (currentRoom.getBroadcast().equals("sendBack")) {
+                                player1.setxLoc(oldPos.getX());
+                                player1.setyLoc(oldPos.getY());
+                                currentRoom.leaveRoom(player1);
+                                map.getRoom(oldPos.getX(), oldPos.getY()).enterRoom(player1);
+                            }
+                            System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
+                            touchedPlaces.add(new Position(player1.getxLoc(), player1.getyLoc()));
+                            System.out.println(touchedPlaces.get(0));
+                            map.print();
+                        } else {
+                            System.out.println("Please choose a valid move.");
+                        }
+                    } else if (choices.equals("2")) {
+                        player1.printInv();
+                    } else if (choices.equals("3")){
+                        System.out.println("[K] = a Room with a KEY" +"\n"+ "[L] = a Locked Room"+ "\n" +"[W] = Werewolf"+ "\n" +"[w] = Wolf");
+                    }
+
             }
         }
         in.close();

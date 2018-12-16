@@ -3,13 +3,15 @@ package Items;
 import Game.Constants;
 import People.Person;
 
-public class Key extends Item implements ConsumableItems{
+public class Key implements ConsumableItems{
 
     String id;
+    String name;
 
     public Key()
     {
         this.id=Constants.getNextKeyID();
+        this.name="Key: " + id;
     }
 
 
@@ -21,5 +23,6 @@ public class Key extends Item implements ConsumableItems{
     public String getID() {
         return this.id;
     }
+    public String getName() {return this.name;}
 
 }

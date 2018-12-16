@@ -4,5 +4,5 @@ import People.Person;
 
 public interface ConsumableItems {
     void use(Person x);
-    String getID();
+    String getName();
 }

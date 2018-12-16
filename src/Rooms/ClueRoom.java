@@ -16,7 +16,7 @@ public class ClueRoom extends Room
     {
         super(position);
         this.id= Constants.getNextRoomID();
-        this.contain="[...]";
+        this.contain="[?]";
         this.broadcast="";
     }
 
@@ -72,7 +72,7 @@ public class ClueRoom extends Room
        String[] clues={"The winning room may be closer that you think...Or not",
                "If the a key has the same ID as a lock, the lock can be unlocked with that key",
                "Maybe look around you, examine the map, only to find that there ARE no clues...",
-                ""};
+                "I think a puppy is guarding the Escape, find a gun?"};
        Random rand = new Random();
         int n = rand.nextInt(clues.length);
 

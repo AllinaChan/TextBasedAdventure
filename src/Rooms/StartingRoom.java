@@ -7,10 +7,11 @@ import People.Person;
 public class StartingRoom extends Room
 {
     String contain;
-
+    String broadcast;
     public StartingRoom(Position position) {
         super(position);
         this.contain="[ ]";
+        this.broadcast="";
     }
 
     /**
@@ -24,29 +25,8 @@ public class StartingRoom extends Room
         x.setxLoc(this.position.getX());
         x.setyLoc(this.position.getY());
         contain= "[X]";
-
-        System.out.println(
-                "███████████████████████████\n" +
-                "███████▀▀▀░░░░░░░▀▀▀███████\n" +
-                "████▀░░░░░░░░░░░░░░░░░▀████\n" +
-                "███│░░░░░░░░░░░░░░░░░░░│███\n" +
-                "██▌│░░░░░░░░░░░░░░░░░░░│▐██\n" +
-                "██░└┐░░░░░░░░░░░░░░░░░┌┘░██\n" +
-                "██░░└┐░░░░░░░░░░░░░░░┌┘░░██\n" +
-                "██░░┌┘▄▄▄▄▄░░░░░▄▄▄▄▄└┐░░██\n" +
-                "██▌░│██████▌░░░▐██████│░▐██\n" +
-                "███░│▐███▀▀░░▄░░▀▀███▌│░███\n" +
-                "██▀─┘░░░░░░░▐█▌░░░░░░░└─▀██\n" +
-                "██▄░░░▄▄▄▓░░▀█▀░░▓▄▄▄░░░▄██\n" +
-                "████▄─┘██▌░░░░░░░▐██└─▄████\n" +
-                "█████░░▐█─┬┬┬┬┬┬┬─█▌░░█████\n" +
-                "████▌░░░▀┬┼┼┼┼┼┼┼┬▀░░░▐████\n" +
-                "█████▄░░░└┴┴┴┴┴┴┴┘░░░▄█████\n" +
-                "███████▄░░░░░░░░░░░▄███████\n" +
-                "██████████▄▄▄▄▄▄▄██████████\n" +
-                "███████████████████████████");
         System.out.println("-ESCAPE ROOM INITIALIZATION COMPLETE-");
-        System.out.println("Try to get to the end, okaY?");
+        System.out.println("Good luck adventurer! I will be sipping a cup of tea on the other side ;D");
     }
 
     public void leaveRoom(Person x)
@@ -57,7 +37,7 @@ public class StartingRoom extends Room
 
     @Override
     public String getBroadcast() {
-        return null;
+        return broadcast;
     }
 
     public String getContain() {
