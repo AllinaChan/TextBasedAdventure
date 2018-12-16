@@ -5,12 +5,13 @@ import People.Person;
 
 public class Key extends Item implements ConsumableItems{
 
-    String id=Constants.getNextKeyID();
+    String id;
 
-    public Key(Person x)
+    public Key()
     {
-        super(x);
+        this.id=Constants.getNextKeyID();
     }
+
 
     public void use(Person x)
     {

@@ -8,12 +8,14 @@ public class LockedRoom extends Room {
     String id;
     String contain;
    String lockID;
+   String broadcast;
     public LockedRoom(Position position)
     {
         super(position);
         this.id=Constants.getNextRoomID();
         this.contain="[L]";
         this.lockID= Constants.getNextLockID();
+        this.broadcast="";
     }
 
     /**
@@ -30,11 +32,11 @@ public class LockedRoom extends Room {
         contain= "[X]";
     }
 
-    public static int getNewID()
-    {
-        return 10;
-    }
 
+    @Override
+    public String getBroadcast() {
+        return broadcast;
+    }
 
     public String getContain() {
         return contain;
@@ -46,6 +48,7 @@ public class LockedRoom extends Room {
     public void leaveRoom(Person x)
     {
         occupant = null;
+        contain="[ ]";
     }
 
     @Override

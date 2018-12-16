@@ -11,12 +11,13 @@ public class ClueRoom extends Room
 {
     String contain;
     String id;
-
+    String broadcast;
     public ClueRoom(Position position)
     {
         super(position);
         this.id= Constants.getNextRoomID();
         this.contain="[...]";
+        this.broadcast="";
     }
 
     /**
@@ -50,9 +51,15 @@ public class ClueRoom extends Room
         return contain;
     }
 
+    @Override
+    public String getBroadcast() {
+        return broadcast;
+    }
+
     public void leaveRoom(Person x)
     {
         occupant = null;
+        contain="[ ]";
     }
     public String toString()
     {

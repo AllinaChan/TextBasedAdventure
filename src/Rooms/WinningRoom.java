@@ -7,10 +7,11 @@ import People.Person;
 public class WinningRoom extends Room
 {
     String contain;
-
+    String broadcast;
     public WinningRoom(Position position) {
         super(position);
-        this.contain="[ ]";
+        this.contain="[?]";
+        this.broadcast="";
     }
 
     /**
@@ -28,6 +29,10 @@ public class WinningRoom extends Room
         Runner.gameOff();
     }
 
+    @Override
+    public String getBroadcast() {
+        return broadcast;
+    }
 
     public String getContain() {
         return contain;

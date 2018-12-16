@@ -48,4 +48,9 @@ public class Position {
         if (xLoc != position.xLoc) return false;
         return yLoc == position.yLoc;
     }
+
+    @Override
+    public String toString() {
+        return "(x:"+ getX()+", y:" + getY()+")";
+    }
 }

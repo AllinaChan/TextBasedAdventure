@@ -30,17 +30,17 @@ public class Person {
 
     public ArrayList<String> getKeys()
     {
-        return this.keys;
+        return keys;
     }
 
     public void addKey(String key)
     {
-        this.keys.add(key);
+        keys.add(key);
     }
 
     public void removeKey(String key)
     {
-        this.keys.remove(key);
+        keys.remove(key);
     }
 
 
@@ -48,5 +48,6 @@ public class Person {
     {
         this.Name = Name;
         this.position=position;
+        this.keys=new ArrayList<>();
     }
 }

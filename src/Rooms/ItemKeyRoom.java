@@ -12,13 +12,15 @@ public class ItemKeyRoom extends Room {
     String contain;
     Key key;
     String id;
+    String broadcast;
 
     public ItemKeyRoom(Position position)
     {
      super(position);
      this.id=Constants.getNextRoomID();
      this.contain="[I]";
-     this.key=key;
+     this.key= new Key();
+     this.broadcast="";
     }
 
     /**
@@ -47,12 +49,19 @@ public class ItemKeyRoom extends Room {
         }
         if(response.equals("yes"))
         {
+            System.out.println(key.getID());
             x.addKey(key.getID());
         }
         if(response.equals("no"))
         {
             System.out.println("Then how are you gonna open that door");
+            broadcast= "sendBack";
         }
+    }
+
+    public String getBroadcast()
+    {
+        return broadcast;
     }
 
     public String getContain() {
@@ -66,7 +75,12 @@ public class ItemKeyRoom extends Room {
     public void leaveRoom(Person x)
     {
         occupant = null;
-        contain="[I]";
+        contain="[ ]";
+        if(broadcast.equals("sendBack"))
+        {
+            contain="[K]";
+        }
+
     }
     public String toString()
     {

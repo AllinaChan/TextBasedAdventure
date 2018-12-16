@@ -35,4 +35,8 @@ public abstract class Room {
     {
         return "[ ]";
     }
+
+    public abstract String getBroadcast();
+
+
 }

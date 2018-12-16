@@ -61,6 +61,13 @@ public class Board
         this.map[y][x] = room;
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
 
     public void print()
     {
@@ -75,5 +82,12 @@ public class Board
             System.out.println(result);
         }
     }
+    public Room getRoom(int xPos, int yPos)
+    {
+        Room result= null;
 
+        result=this.map[xPos][yPos];
+
+        return result;
+    }
 }

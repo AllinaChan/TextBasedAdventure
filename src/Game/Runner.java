@@ -1,10 +1,9 @@
 package Game;
 
 import People.Person;
-import Rooms.ItemKeyRoom;
-import Rooms.Room;
-import Rooms.ClueRoom;
-import Rooms.WinningRoom;
+import Rooms.*;
+
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,6 +16,7 @@ public class Runner {
         String difficulty="";
         int height=0;
         int width=0;
+        ArrayList<Position> touchedPlaces= new ArrayList<>();
         Board map = new Board(0, 0);
         Scanner in = new Scanner(System.in);
         System.out.println("WELCOME TO THE ESCAPE ROOM");
@@ -41,6 +41,8 @@ public class Runner {
                 System.out.println("'e' for a 5x5 layout | 'm' for a 10x10 layout | 'h' for a 15x15 layout");
                 difficulty = in.nextLine();
                 map = new Board(difficulty);
+                height=map.getHeight();
+                width=map.getWidth();
             }
         }
 
@@ -62,24 +64,42 @@ public class Runner {
                 map.getBoard()[x][y] = new ItemKeyRoom( new Position (x,y));
             }
         }
-        System.out.println(height);
-        System.out.println(width);
         //Create winning room.
-    map.getBoard()[height+1][width+1] = new WinningRoom(new Position(height+1, width+1));
+        int randWinH=randomHeight(height);
+        int randWinW=randomWidth(width);
+        System.out.println(randWinH);
+        System.out.println(randWinW);
+        map.getBoard()[randWinH][randWinW] = new WinningRoom(new Position(randWinH, randWinW));
 
 
+        map.getBoard()[0][0]= new StartingRoom(new Position (0,0));
 
         //Setup player 1 and the input scanner
         Person player1 = new Person(name, new Position(0,0));
         initial = true;
+
+        //DELETE THIS LATER THE PRINT MAP
         map.print();
+
+
         if (initial) {
             map.getBoard()[0][0].enterRoom(player1);
             while (gameOn) {
                 System.out.println("Where would you like to move? (Choose N, S, E, W)");
                 String move = in.nextLine();
+                Position oldPos= new Position(player1.getxLoc(), player1.getyLoc());
                 if (validMove(move, player1, map.getBoard())) {
+                    Room currentRoom= map.getRoom(player1.getxLoc(),player1.getyLoc());
+                    System.out.println(currentRoom.getBroadcast());
+                    if(currentRoom.getBroadcast().equals("sendBack"))
+                    {
+                        player1.setxLoc(oldPos.getX());
+                        player1.setyLoc(oldPos.getY());
+                    }
+                    System.out.println(" ");
                     System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
+                    touchedPlaces.add(new Position(player1.getxLoc(), player1.getyLoc()));
+                    System.out.println(touchedPlaces.get(0));
                     map.print();
                 } else {
                     System.out.println("Please choose a valid move.");
@@ -96,12 +116,24 @@ public class Runner {
      */
     public static int randomHeight(int height)
     {
-        int l= height-1;
-        int g= height;
-        int f=height-2;
+        int l= height-2;
+        int f=height-3;
+
+        int result=0;
 
 
-        return
+        int randomNumb = (int)(Math.random());
+
+        if(randomNumb==0)
+        {
+            result= l;
+        }
+        if(randomNumb==1)
+        {
+            result= f;
+        }
+
+        return result;
     }
 
     /**
@@ -112,9 +144,29 @@ public class Runner {
 
     public static int randomWidth(int width)
     {
-        return
-    }
+        int l= width-2;
+        int g= width-3;
+        int f=width-4;
+        int result=0;
 
+
+        int randomNumb = (int)(Math.random()*2);
+
+        if(randomNumb==0)
+        {
+            result= l;
+        }
+        if(randomNumb==1)
+        {
+            result= g;
+        }
+        if(randomNumb==2)
+        {
+            result= f;
+        }
+
+        return result;
+    }
 
 
     /**
