@@ -1,14 +1,19 @@
 package Rooms;
 
 import Game.Position;
+import Items.HealingPotion;
 import People.Person;
 
 public abstract class Room {
     Person occupant;
     Position position;
+    String broadcast;
+    String contain;
 
     public Room(Position position) {
        this.position=position;
+       this.broadcast="";
+       this.contain="[ ]";
     }
 
     /**
@@ -21,14 +26,17 @@ public abstract class Room {
         occupant = x;
         x.setxLoc(this.position.getX());
         x.setyLoc(this.position.getY());
+        this.contain="[X]";
     }
     /**
      * Removes the player from the room.
      *
      * @param x
      */
+
     public void leaveRoom(Person x) {
         occupant = null;
+        this.contain="[ ]";
     }
 
     public String toString()
@@ -36,7 +44,18 @@ public abstract class Room {
         return "[ ]";
     }
 
-    public abstract String getBroadcast();
+    public String getBroadcast()
+    {
+        return broadcast;
+    }
+
+    public void respawn(Person x)
+    {
+        occupant = x;
+        x.setxLoc(0);
+        x.setyLoc(0);
+        contain="[X]";
+    }
 
 
 }

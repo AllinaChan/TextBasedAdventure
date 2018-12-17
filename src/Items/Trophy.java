@@ -1,5 +1,7 @@
 package Items;
 
+import People.Person;
+
 public class Trophy {
 
     String name;
@@ -7,6 +9,11 @@ public class Trophy {
     public Trophy()
     {
         this.name="Trophy";
+    }
+
+    public void pickUp(Person x)
+    {
+        x.setTrophy();
     }
 
 }

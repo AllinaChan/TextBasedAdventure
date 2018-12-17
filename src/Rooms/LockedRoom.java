@@ -14,15 +14,16 @@ public class LockedRoom extends Room {
     {
         super(position);
         this.id=Constants.getNextRoomID();
-        this.contain="[L]";
         this.lockID= Constants.getNextLockID();
         this.broadcast="";
+        this.contain="[" +lockID+"]";
     }
 
     /**
      * Method controls the results when a person enters this room.
      * @param x the Person entering
      */
+    @Override
     public void enterRoom(Person x)
     {
         if(x.getKeys().contains(lockID))
@@ -30,19 +31,16 @@ public class LockedRoom extends Room {
 
             System.out.println("You have unlocked the door!");
 
+        } else {
+            System.out.println("You need a key for this room");
+            occupant = x;
+            x.setxLoc(this.position.getX());
+            x.setyLoc(this.position.getY());
+            contain = "[X]";
+            broadcast="sendBack";
         }
-        System.out.println("You need a key for this room");
-        occupant = x;
-        x.setxLoc(this.position.getX());
-        x.setyLoc(this.position.getY());
-        contain= "[X]";
     }
 
-
-    @Override
-    public String getBroadcast() {
-        return broadcast;
-    }
 
     public String getContain() {
         return contain;
@@ -51,6 +49,7 @@ public class LockedRoom extends Room {
      * Removes the player from the room.
      * @param x
      */
+    @Override
     public void leaveRoom(Person x)
     {
         occupant = null;
@@ -60,7 +59,7 @@ public class LockedRoom extends Room {
     @Override
     public String toString()
     {
-        return getContain();
+        return contain;
     }
 
 }

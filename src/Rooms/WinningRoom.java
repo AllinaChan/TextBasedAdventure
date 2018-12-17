@@ -21,12 +21,16 @@ public class WinningRoom extends Room
     @Override
     public void enterRoom(Person x) {
 
-        occupant = x;
-        x.setxLoc(this.position.getX());
-        x.setyLoc(this.position.getY());
-        contain= "[X]";
-        System.out.println("WHAT? HOW DID YOU GET HERE? IF you dare, try a different difficulty" );
-        Runner.gameOff();
+        if(x.getFragments().size()>3) {
+            occupant = x;
+            x.setxLoc(this.position.getX());
+            x.setyLoc(this.position.getY());
+            contain = "[X]";
+            System.out.println("CONGRATULATIONS! YOU HAVE MADE IT! Thanks for playing...");
+            Runner.gameOff();
+        } else{
+
+        }
     }
 
     @Override

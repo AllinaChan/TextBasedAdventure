@@ -1,22 +1,22 @@
 package Rooms;
 
 import Game.Position;
-import Items.Gun;
 import People.Person;
 
-public class RoomWithGun extends Room{
+public class EmptyRoom extends Room{
 
-    Gun gun;
-    String broadcast;
+    String[] clues;
     String contains;
 
-    public RoomWithGun(Position position)
+    public EmptyRoom(Position position)
     {
         super(position);
-       this.gun=new Gun();
-       this.broadcast="";
-       this.contains="[G]";
+        this.clues= new String[]{"There is a puppy guarding the Escape, go pat it...",
+        "Maybe you should gather every item on the map first", "Those wolves are feisty", "If you die, you just go back to the beginning",
+        "I'm telling you, bullets flies faster than a Werewolf can pounce"};
+        this.contains="[ ]";
     }
+
 
     /**
      * Method controls the results when a person enters this room.
@@ -25,17 +25,12 @@ public class RoomWithGun extends Room{
      */
     @Override
     public void enterRoom(Person x) {
-        System.out.println("You found the gun!");
-        gun.fusionPickUp(x);
-        System.out.println("--GUN ACQUIRED--");
+
+        System.out.println(this.clues[(int)(Math.random()*clues.length)]);
         occupant = x;
         x.setxLoc(this.position.getX());
         x.setyLoc(this.position.getY());
-        contains="[X]";
-        if(x.getAttack()>=10000)
-        {
-            broadcast="canKillWerewolf";
-        }
+        this.contains="[X]";
     }
 
     /**
@@ -43,15 +38,15 @@ public class RoomWithGun extends Room{
      *
      * @param x
      */
-    @Override
+@Override
     public void leaveRoom(Person x) {
-        contains="[ ]";
         occupant = null;
+        this.contain="[ ]";
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return contains;
     }
-
 }

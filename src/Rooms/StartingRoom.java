@@ -10,7 +10,7 @@ public class StartingRoom extends Room
     String broadcast;
     public StartingRoom(Position position) {
         super(position);
-        this.contain="[ ]";
+        this.contain="[X]";
         this.broadcast="";
     }
 
@@ -25,10 +25,12 @@ public class StartingRoom extends Room
         x.setxLoc(this.position.getX());
         x.setyLoc(this.position.getY());
         contain= "[X]";
-        System.out.println("-ESCAPE ROOM INITIALIZATION COMPLETE-");
-        System.out.println("Good luck adventurer! I will be sipping a cup of tea on the other side ;D");
+        System.out.println("While you risk your life, I will be back at the village sipping on a cup of tea.");
+        System.out.println("*Whispering* it sure is smart asking someone to kill a Werewolf during a full moon...");
+
     }
 
+    @Override
     public void leaveRoom(Person x)
     {
         occupant = null;

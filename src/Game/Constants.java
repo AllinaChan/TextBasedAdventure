@@ -5,7 +5,7 @@ public class Constants {
     public static int keyID=-1;
     public static int RoomID=-1;
     public static int lockID=-1;
-    public static int fragmentID=-1;
+    public static int fragmentID=0;
 
 
     public static String getNextKeyID()

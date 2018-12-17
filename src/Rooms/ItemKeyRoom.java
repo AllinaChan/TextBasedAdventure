@@ -27,6 +27,7 @@ public class ItemKeyRoom extends Room {
      * Method controls the results when a person enters this room.
      * @param x the Person entering
      */
+    @Override
     public void enterRoom(Person x) {
         if (contain.equals("[ ]")) {
             contain = "[X]";
@@ -60,10 +61,7 @@ public class ItemKeyRoom extends Room {
         }
     }
 
-    public String getBroadcast()
-    {
-        return broadcast;
-    }
+
 
     public String getContain() {
         return contain;
@@ -73,6 +71,7 @@ public class ItemKeyRoom extends Room {
      * Removes the player from the room.
      * @param x
      */
+    @Override
     public void leaveRoom(Person x)
     {
         occupant = null;
@@ -85,7 +84,7 @@ public class ItemKeyRoom extends Room {
     }
     public String toString()
     {
-        return getContain();
+        return contain;
     }
 
 }

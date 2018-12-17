@@ -9,5 +9,14 @@ public abstract class Weapon {
     public void pickUp(Person x)
     {
         x.addWeapon(name);
+        x.addAttack(attack);
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+    public String toString() {
+        return name;
     }
 }

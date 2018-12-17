@@ -20,4 +20,6 @@ public class Gun extends Weapon{
             x.addWeapon(name);
         }
     }
+
+
 }
