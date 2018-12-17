@@ -41,7 +41,14 @@ public abstract class Room {
 
     public String toString()
     {
-        return "[ ]";
+        return getContain();
+    }
+    public Position getPosition()
+    {
+        return position;
+    }
+    public String getContain() {
+        return contain;
     }
 
     public String getBroadcast()

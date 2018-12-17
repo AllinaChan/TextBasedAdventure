@@ -16,7 +16,7 @@ public class LockedRoom extends Room {
         this.id=Constants.getNextRoomID();
         this.lockID= Constants.getNextLockID();
         this.broadcast="";
-        this.contain="[" +lockID+"]";
+        this.contain="[L]";
     }
 
     /**
@@ -30,9 +30,10 @@ public class LockedRoom extends Room {
         {
 
             System.out.println("You have unlocked the door!");
-
-        } else {
-            System.out.println("You need a key for this room");
+            broadcast="unlocked";
+        }
+        else {
+            System.out.println("You need key ID: "+ lockID+" to open this room");
             occupant = x;
             x.setxLoc(this.position.getX());
             x.setyLoc(this.position.getY());
@@ -53,7 +54,7 @@ public class LockedRoom extends Room {
     public void leaveRoom(Person x)
     {
         occupant = null;
-        contain="[ ]";
+        contain= "[" +lockID+"]";
     }
 
     @Override

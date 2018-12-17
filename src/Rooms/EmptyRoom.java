@@ -19,34 +19,37 @@ public class EmptyRoom extends Room{
 
 
     /**
-     * Method controls the results when a person enters this room.
-     *
+     * Triggers the game ending conditions.
      * @param x the Person entering
      */
     @Override
     public void enterRoom(Person x) {
 
-        System.out.println(this.clues[(int)(Math.random()*clues.length)]);
         occupant = x;
         x.setxLoc(this.position.getX());
         x.setyLoc(this.position.getY());
-        this.contains="[X]";
-    }
+        contain= "[X]";
+        System.out.println(this.clues[(int)(Math.random()*clues.length)]);
 
-    /**
-     * Removes the player from the room.
-     *
-     * @param x
-     */
-@Override
-    public void leaveRoom(Person x) {
-        occupant = null;
-        this.contain="[ ]";
     }
 
     @Override
-    public String toString()
+    public void leaveRoom(Person x)
     {
-        return contains;
+        occupant = null;
+        contain="[ ]";
     }
+
+    @Override
+    public String getBroadcast() {
+        return broadcast;
+    }
+
+    public String getContain() {
+        return contain;
+    }
+    public String toString() {
+        return getContain();
+    }
+
 }

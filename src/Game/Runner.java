@@ -84,7 +84,7 @@ public class Runner {
              gotIt = gotIt.toLowerCase().trim();
          }
 
-
+        Person player1 = new Person(name, new Position(0,0));
 
         //Fill the map.getBoard() with item rooms
         for (int x = 0; x < map.getBoard().length; x++) {
@@ -98,12 +98,13 @@ public class Runner {
         map.getBoard()[randWinH][randWinW] = new WinningRoom(new Position(randWinH, randWinW));
         map.getBoard()[randWinH][randWinW-1] = new RoomWithWerewolf(new Position(randWinH, randWinW-1));
 
+        addWolfRooms(height,width,map.getBoard(),difficulty,player1,new Position(randWinH, randWinW-1));
 
         //replaces (0,0)
         map.getBoard()[0][0]= new StartingRoom(new Position (0,0));
 
         //Setup player 1 and the input scanner
-        Person player1 = new Person(name, new Position(0,0));
+
         initial = true;
 
         map.print();
@@ -161,6 +162,10 @@ public class Runner {
                                     currentRoom.respawn(player1);
                                     map.print();
                                 }
+                                if(currentRoom.getBroadcast().equals("unlocked"))
+                                {
+                                    map.getBoard()[currentRoom.getPosition().getX()][currentRoom.getPosition().getY()]= new EmptyRoom(new Position(currentRoom.getPosition().getX(), currentRoom.getPosition().getY()));
+                                }
                                 System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
                                 touchedPlaces.add(new Position(player1.getxLoc(), player1.getyLoc()));
                                 map.print();
@@ -193,6 +198,10 @@ public class Runner {
                                     currentRoom.respawn(player1);
                                     map.print();
                                 }
+                                if(currentRoom.getBroadcast().equals("unlocked"))
+                                {
+                                    map.getBoard()[currentRoom.getPosition().getX()][currentRoom.getPosition().getY()]= new EmptyRoom(new Position(currentRoom.getPosition().getX(), currentRoom.getPosition().getY()));
+                                }
                                 System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
                                 touchedPlaces.add(new Position(player1.getxLoc(), player1.getyLoc()));
                                 map.print();
@@ -212,6 +221,10 @@ public class Runner {
                             if(currentRoom.getBroadcast().equals("canKillWerewolf"))
                             {
                                 System.out.println("Your gun is now loaded with a silver bullet. GO KILL THAT WEREWOLF!");
+                            }
+                            if(currentRoom.getBroadcast().equals("unlocked"))
+                            {
+                                map.getBoard()[currentRoom.getPosition().getX()][currentRoom.getPosition().getY()]= new EmptyRoom(new Position(currentRoom.getPosition().getX(), currentRoom.getPosition().getY()));
                             }
                             if(currentRoom.getBroadcast().equals("sendBackToSPAWN"))
                             {
@@ -303,10 +316,56 @@ public class Runner {
 
     public static void addWolfRooms(int height, int width, Room[][] map, String difficulty, Person x, Position Werewolf)
     {
+        Position oneWolfPos =directionalOffset("n", Werewolf);
         if(difficulty.equals("one"))
         {
-            
+            map[oneWolfPos.getX()][oneWolfPos.getY()]=new RoomWithWolf(new Position(oneWolfPos.getX(),oneWolfPos.getY()));
+        }else if (difficulty.equals("two"))
+        {
+            map[oneWolfPos.getX()][oneWolfPos.getY()]=new RoomWithWolf(new Position(oneWolfPos.getX(),oneWolfPos.getY()));
         }
+        else if(difficulty.equals("three"))
+        {
+            map[oneWolfPos.getX()][oneWolfPos.getY()]=new RoomWithWolf(new Position(oneWolfPos.getX(),oneWolfPos.getY()));
+        }
+    }
+
+    public static boolean isOccupied(Position checkPos, Room[][] map)
+    {
+        boolean result = false;
+        if (map[checkPos.getX()][checkPos.getY()].toString().equals("[W]"))
+        {
+            result = true;
+        }
+        if (map[checkPos.getX()][checkPos.getY()].toString().equals("[w]"))
+        {
+            result = true;
+        }
+        if (map[checkPos.getX()][checkPos.getY()].toString().equals("[G]"))
+        {
+            result = true;
+        }
+        if (map[checkPos.getX()][checkPos.getY()].toString().equals("[B]"))
+        {
+            result = true;
+        }
+        if (map[checkPos.getX()][checkPos.getY()].toString().equals("[H]"))
+        {
+            result = true;
+        }
+        if (map[checkPos.getX()][checkPos.getY()].toString().equals("[S]"))
+        {
+            result = true;
+        }
+        if (map[checkPos.getX()][checkPos.getY()].toString().equals("[K]"))
+        {
+            result = true;
+        }
+        if (map[checkPos.getX()][checkPos.getY()].toString().equals("[L]"))
+        {
+            result = true;
+        }
+        return result;
     }
 
     public static Position directionalOffset(String direction, Position source)
