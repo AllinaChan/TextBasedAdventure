@@ -21,12 +21,35 @@ public class StartingRoom extends Room
     @Override
     public void enterRoom(Person x) {
 
-        occupant = x;
-        x.setxLoc(this.position.getX());
-        x.setyLoc(this.position.getY());
-        contain= "[X]";
-        System.out.println("While you risk your life, I will be back at the village sipping on a cup of tea.");
-        System.out.println("*Whispering* it sure is smart asking someone to kill a Werewolf during a full moon...");
+        if(broadcast.equals("playerLeft"))
+        {
+            System.out.println("Welcome back...");
+        }
+        else {
+
+            occupant = x;
+            x.setxLoc(this.position.getX());
+            x.setyLoc(this.position.getY());
+            contain = "[X]";
+            System.out.println(" ");
+            System.out.println("Here's the MAP LEGEND, you can access it anytime.");
+            System.out.println("[X] = You"+"\n"+"[K] = Room with a KEY" +"\n"+ "[L] = Room with a lock, you can check what key ID you need by entering it"+
+                    "\n" +"[W] = Werewolf"+ "\n" +"[w] = Wolf" +"\n"+ "[G] = Gun"+"\n"+"[B] = Silver Bullet"+"\n"+ "[H] = Health Potion" +"\n"+"[S] = Sword" + "\n"+ "[-] = Starting Room");
+
+            try
+            {
+                Thread.sleep(2000);
+            }
+            catch(InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }
+
+            System.out.println("-------------------------");
+            System.out.println("While you risk your life, I will be back at the village sipping on a cup of tea.");
+            System.out.println("*Whispering* it sure is smart asking someone to kill a Werewolf during a full moon...");
+            broadcast = "playerLeft";
+        }
 
     }
 
@@ -34,7 +57,7 @@ public class StartingRoom extends Room
     public void leaveRoom(Person x)
     {
         occupant = null;
-        contain="[ ]";
+        contain="[-]";
     }
 
     @Override

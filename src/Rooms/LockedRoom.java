@@ -24,27 +24,40 @@ public class LockedRoom extends Room {
      * @param x the Person entering
      */
     @Override
-    public void enterRoom(Person x)
-    {
-        if(x.getKeys().contains(lockID))
-        {
-
-            System.out.println("You have unlocked the door!");
-            broadcast="unlocked";
-        }
-        else {
-            System.out.println("You need key ID: "+ lockID+" to open this room");
+    public void enterRoom(Person x) {
+        if (broadcast.equals("unlocked")) {
+            contain = "[X]";
             occupant = x;
             x.setxLoc(this.position.getX());
             x.setyLoc(this.position.getY());
-            contain = "[X]";
-            broadcast="sendBack";
+
+        } else {
+            if (x.getKeys().contains(lockID)) {
+                System.out.println("-------------------------");
+                System.out.println("You have unlocked the door!");
+                broadcast = "unlocked";
+                x.setxLoc(this.position.getX());
+                x.setyLoc(this.position.getY());
+                contain = "[X]";
+                occupant = x;
+            } else {
+                System.out.println("-------------------------");
+                System.out.println("You need key ID: " + lockID + " to open this room");
+                occupant = x;
+                x.setxLoc(this.position.getX());
+                x.setyLoc(this.position.getY());
+                broadcast = "sendBack";
+            }
         }
     }
 
 
     public String getContain() {
         return contain;
+    }
+    public String getBroadcast()
+    {
+        return broadcast;
     }
     /**
      * Removes the player from the room.
@@ -54,7 +67,14 @@ public class LockedRoom extends Room {
     public void leaveRoom(Person x)
     {
         occupant = null;
-        contain= "[" +lockID+"]";
+        if(broadcast.equals("sendBack"))
+        {
+            contain= "[" +lockID+"]";
+        }
+        else if(broadcast.equals("unlocked"))
+        {
+            contain="[ ]";
+        }
     }
 
     @Override

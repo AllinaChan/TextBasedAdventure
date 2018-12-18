@@ -10,14 +10,14 @@ public class RoomWithSword extends Room{
 
     Sword sword;
     String broadcast;
-    String contains;
+    String contain;
 
     public RoomWithSword(Position position)
     {
         super(position);
         this.sword=new Sword();
         this.broadcast="";
-        this.contains="[S]";
+        this.contain="[S]";
     }
 
     /**
@@ -27,13 +27,25 @@ public class RoomWithSword extends Room{
      */
     @Override
     public void enterRoom(Person x) {
-        System.out.println("You found the sword! You can now kill wolfs without dying");
-        sword.pickUp(x);
-        System.out.println("--SWORD ACQUIRED--");
-        occupant = x;
-        x.setxLoc(this.position.getX());
-        x.setyLoc(this.position.getY());
-        contains="[X]";
+
+        if(broadcast.equals("sword"))
+        {
+            contain = "[X]";
+            occupant = x;
+            x.setxLoc(this.position.getX());
+            x.setyLoc(this.position.getY());
+
+        }else {
+            System.out.println("-------------------------");
+            System.out.println("You found the sword! You can now kill wolfs without dying");
+            sword.pickUp(x);
+            System.out.println("--SWORD ACQUIRED--");
+            occupant = x;
+            x.setxLoc(this.position.getX());
+            x.setyLoc(this.position.getY());
+            contain = "[X]";
+            broadcast = "sword";
+        }
     }
 
     /**
@@ -43,13 +55,22 @@ public class RoomWithSword extends Room{
      */
     @Override
     public void leaveRoom(Person x) {
-        contains="[ ]";
+        contain="[ ]";
         occupant = null;
+    }
+    public String getBroadcast()
+    {
+        return broadcast;
+    }
+
+    @Override
+    public String getContain() {
+        return contain;
     }
 
     @Override
     public String toString() {
-        return contains;
+        return getContain();
     }
 
 }

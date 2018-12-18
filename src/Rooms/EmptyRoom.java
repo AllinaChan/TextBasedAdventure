@@ -6,15 +6,27 @@ import People.Person;
 public class EmptyRoom extends Room{
 
     String[] clues;
-    String contains;
-
+    String contain;
+    String x;
     public EmptyRoom(Position position)
     {
         super(position);
         this.clues= new String[]{"There is a puppy guarding the Escape, go pat it...",
         "Maybe you should gather every item on the map first", "Those wolves are feisty", "If you die, you just go back to the beginning",
         "I'm telling you, bullets flies faster than a Werewolf can pounce"};
-        this.contains="[ ]";
+        this.contain="[ ]";
+    }
+
+
+    //A overloaded constructor to differentiate a replacement room and a default empty room
+    public EmptyRoom(Position position, String x)
+    {
+        super(position);
+        this.clues= new String[]{"There is a puppy guarding the Escape, go pat it...",
+                "Maybe you should gather every item on the map first", "Those wolves are feisty", "If you die, you just go back to the beginning",
+                "I'm telling you, bullets flies faster than a Werewolf can pounce"};
+        //Only difference
+        this.contain="[X]";
     }
 
 
@@ -29,6 +41,7 @@ public class EmptyRoom extends Room{
         x.setxLoc(this.position.getX());
         x.setyLoc(this.position.getY());
         contain= "[X]";
+        System.out.println("-------------------------");
         System.out.println(this.clues[(int)(Math.random()*clues.length)]);
 
     }

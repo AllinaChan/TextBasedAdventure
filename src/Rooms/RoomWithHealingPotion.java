@@ -9,14 +9,14 @@ public class RoomWithHealingPotion extends Room{
 
     HealingPotion healingPotion;
     String broadcast;
-    String contains;
+    String contain;
 
     public RoomWithHealingPotion(Position position)
     {
         super(position);
         this.healingPotion=new HealingPotion();
         this.broadcast="";
-        this.contains="[H]";
+        this.contain="[H]";
     }
 
     /**
@@ -26,17 +26,31 @@ public class RoomWithHealingPotion extends Room{
      */
     @Override
     public void enterRoom(Person x) {
-        System.out.println("You found a healing potion! If you drink it you can get full health");
-        healingPotion.pickUp(x);
-        System.out.println("--HEAL POTION ACQUIRED--");
-        occupant = x;
-        x.setxLoc(this.position.getX());
-        x.setyLoc(this.position.getY());
-        contains="[X]";
+        if (broadcast.equals("potion")) {
+            contain = "[X]";
+            occupant = x;
+            x.setxLoc(this.position.getX());
+            x.setyLoc(this.position.getY());
+
+        } else {
+            System.out.println("-------------------------");
+            System.out.println("You found a healing potion! If you drink it you can get full health");
+            healingPotion.pickUp(x);
+            System.out.println("--HEAL POTION ACQUIRED--");
+            occupant = x;
+            x.setxLoc(this.position.getX());
+            x.setyLoc(this.position.getY());
+            contain = "[X]";
+            broadcast = "potion";
+        }
     }
 
     public HealingPotion getHealingPotion() {
         return healingPotion;
+    }
+    public String getBroadcast()
+    {
+        return broadcast;
     }
 
     /**
@@ -46,12 +60,12 @@ public class RoomWithHealingPotion extends Room{
      */
     @Override
     public void leaveRoom(Person x) {
-        contains="[ ]";
+        contain="[ ]";
         occupant = null;
     }
     @Override
     public String toString() {
-        return contains;
+        return getContain();
     }
 
 }

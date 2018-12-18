@@ -9,14 +9,14 @@ public class RoomWithSilverBullet extends Room{
 
     SilverBullet bullet;
     String broadcast;
-    String contains;
+    String contain;
 
     public RoomWithSilverBullet(Position position)
     {
         super(position);
         this.bullet=new SilverBullet();
         this.broadcast="";
-        this.contains="[B]";
+        this.contain="[B]";
     }
 
     /**
@@ -26,19 +26,37 @@ public class RoomWithSilverBullet extends Room{
      */
     @Override
     public void enterRoom(Person x) {
-        System.out.println("You found the silver bullet!");
-        bullet.fusionPickUp(x);
-        System.out.println("--SILVER BULLET ACQUIRED--");
-        occupant = x;
-        x.setxLoc(this.position.getX());
-        x.setyLoc(this.position.getY());
-        contains="[X]";
-        if(x.getAttack()>=10000)
-        {
-            broadcast="canKillWerewolf";
+        if (broadcast.equals("bullet")) {
+
+            contain = "[X]";
+            System.out.println(getContain());
+            occupant = x;
+            x.setxLoc(this.position.getX());
+            x.setyLoc(this.position.getY());
+
+        } else {
+            System.out.println("-------------------------");
+            System.out.println("You found the silver bullet!");
+            bullet.fusionPickUp(x);
+            System.out.println("--SILVER BULLET ACQUIRED--");
+            occupant = x;
+            x.setxLoc(this.position.getX());
+            x.setyLoc(this.position.getY());
+            contain = "[X]";
+            if (x.getAttack() >= 10000) {
+                broadcast = "canKillWerewolf";
+            }
+            broadcast = "bullet";
         }
     }
-
+    public String getBroadcast()
+    {
+        return broadcast;
+    }
+    public String getContains()
+    {
+        return contain;
+    }
     /**
      * Removes the player from the room.
      *
@@ -46,12 +64,12 @@ public class RoomWithSilverBullet extends Room{
      */
     @Override
     public void leaveRoom(Person x) {
-        contains="[ ]";
+        contain="[ ]";
         occupant = null;
     }
 
     @Override
     public String toString() {
-        return contains;
+        return getContain();
     }
 }
