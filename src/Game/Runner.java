@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+//Author: Allen Chen Period 9
+
 public class Runner {
 
     private static boolean gameOn = true;
@@ -24,6 +26,7 @@ public class Runner {
 
         String boardChoice="";
 
+        //Loop to ask if the player wants to make a custom map or let the code decide the map with a difficulty
         while(!boardChoice.equals("d") || !boardChoice.equals("c")) {
             if(boardChoice.equals("d")||boardChoice.equals("c"))
             {
@@ -56,6 +59,7 @@ public class Runner {
             }
         }
 
+        //This is my difficulty check. Depending on the map size, there will be different amount of wolves
         String amountOfWolves="";
         if(map.getHeight()<=5 && map.getWidth()<=5)
         {
@@ -86,12 +90,13 @@ public class Runner {
 
         Person player1 = new Person(name, new Position(0,0));
 
-        //Fill the map.getBoard() with item rooms
+        //Fill the map.getBoard() with empty rooms with tips.
         for (int x = 0; x < map.getBoard().length; x++) {
             for (int y = 0; y < map.getBoard()[x].length; y++) {
                 map.getBoard()[x][y] = new EmptyRoom( new Position (x,y));
             }
         }
+
         //Create winning room.
         int randWinH=randomHeightWin(height);
         int randWinW=randomWidthWin(width);
@@ -104,10 +109,10 @@ public class Runner {
         //replaces (0,0)
         map.getBoard()[0][0]= new StartingRoom(new Position (0,0));
 
-        //Key Rooms
+        //Key Rooms creation
         addKeyRooms(height, width,map.getBoard(),amountOfWolves);
 
-        //Item rooms
+        //Item rooms creation
         addBullet(height, width,map.getBoard());
         addGun(height, width,map.getBoard());
         addSword(height, width,map.getBoard());
@@ -268,8 +273,10 @@ public class Runner {
     }
 
 
-
-
+    /**
+     * @param height - map height
+     * @return a random height on the map for random placement
+     */
     public static int randomHeight(int height)
     {
         int result= (int)(Math.random()*height);
@@ -277,6 +284,11 @@ public class Runner {
         return result;
     }
 
+    /**
+     * Picks a random width on the map for random placement
+     * @param width- map width
+     * @return A random width on the map for random placement
+     */
     public static int randomWidth(int width)
     {
         int result= (int)(Math.random()*width);
@@ -284,6 +296,12 @@ public class Runner {
         return result;
     }
 
+    /**
+     * Adds a Room with a gun on the map, that isn't occupied by another room
+     * @param height - map height
+     * @param width - map width
+     * @param map - 2D array map
+     */
     public static void addGun(int height, int width, Room[][] map)
     {
         int h = 0;
@@ -299,6 +317,13 @@ public class Runner {
 
         map[h][w] = new RoomWithGun(new Position(h, w));
     }
+
+    /**
+     * Adds a Room with a Health Potion on the map, that isn't occupied by another room
+     * @param height - map height
+     * @param width - map width
+     * @param map - 2D array map
+     */
     public static void addHealthPotion(int height, int width, Room[][] map)
     {
         int h = 0;
@@ -314,6 +339,13 @@ public class Runner {
 
         map[h][w] = new RoomWithHealingPotion(new Position(h, w));
     }
+
+    /**
+     * Adds a Room with a Silver Bullet on the map, that isn't occupied by another room
+     * @param height - map height
+     * @param width - map width
+     * @param map - 2D array map
+     */
     public static void addBullet(int height, int width, Room[][] map)
     {
         int h = 0;
@@ -329,6 +361,13 @@ public class Runner {
 
         map[h][w] = new RoomWithSilverBullet(new Position(h, w));
     }
+
+    /**
+     * Adds a Room with a Sword on the map, that isn't occupied by another room
+     * @param height - map height
+     * @param width - map width
+     * @param map - 2D array map
+     */
     public static void addSword(int height, int width, Room[][] map)
     {
         int h = 0;
@@ -345,6 +384,13 @@ public class Runner {
         map[h][w] = new RoomWithSword(new Position(h, w));
     }
 
+    /**
+     * Adds the same amount of key rooms for each locked room
+     * @param height - map height
+     * @param width - map width
+     * @param map - 2D array map
+     * @param difficulty - The amount of wolves that the player needs to kill is the difficulty
+     */
     public static void addKeyRooms(int height, int width, Room[][]map, String difficulty)
     {
         if(difficulty.equals("one"))
@@ -400,7 +446,12 @@ public class Runner {
 
     }
 
-
+    /**
+     *
+     * @param map - 2D array of rooms
+     * @param difficulty - The amount of wolves that the player needs to kill is the difficulty
+     * @param Werewolf - Position of the Werewolf lair so i can put a wolf room right above it
+     */
     public static void addWolfRooms(Room[][] map, String difficulty, Position Werewolf)
     {
         Position oneWolfPos =directionalOffset("n", Werewolf);
@@ -488,6 +539,12 @@ public class Runner {
         }
     }
 
+    /**
+     * Checks if the position is occupied with a room
+     * @param checkPos - the position to check
+     * @param map - 2D array of rooms
+     * @return - true if is occupied, false if not
+     */
     public static boolean isOccupied(Position checkPos, Room[][] map)
     {
         boolean result = false;
@@ -534,6 +591,11 @@ public class Runner {
         return result;
     }
 
+    /**
+     * @param direction - North , south, east or west
+     * @param source - the source position
+     * @return a position based on the direction the source will be moving
+     */
     public static Position directionalOffset(String direction, Position source)
     {
         Position result = source;
@@ -554,6 +616,11 @@ public class Runner {
         return result;
     }
 
+    /**
+     * @param difficulty - The amount of wolves that the player needs to kill is the difficulty
+     * @param x - Player
+     * @return - true if the player has enough BossKeyFragments, false if not
+     */
     public static boolean hasEnoughFrags(String difficulty, Person x)
     {
         boolean result=false;
