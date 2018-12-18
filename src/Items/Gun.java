@@ -15,11 +15,15 @@ public class Gun extends Weapon{
         if(x.getWeapons().contains("gun"))
         {
             x.addAttack(10000);
-            x.addWeapon(name);
+            x.addWeapon(new Gun());
         }else{
-            x.addWeapon(name);
+            x.addWeapon(new Gun());
         }
     }
-
+    public void pickUp(Person x)
+    {
+        x.addWeapon(new Gun());
+        x.addAttack(attack);
+    }
 
 }

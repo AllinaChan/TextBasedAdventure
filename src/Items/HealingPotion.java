@@ -21,7 +21,7 @@ public class HealingPotion implements ConsumableItems{
     }
     public void pickUp(Person x)
     {
-        x.addPotion(name);
+        x.addPotion(new HealingPotion());
     }
 
     @Override

@@ -13,7 +13,7 @@ public class BossKeyFragment  {
 
     public void pickUp(Person x)
     {
-        x.addFragment(id);
+        x.addFragment(new BossKeyFragment());
     }
     public String toString() {
         return id;

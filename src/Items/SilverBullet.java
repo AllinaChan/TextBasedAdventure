@@ -15,10 +15,15 @@ public class SilverBullet extends Weapon{
         if(x.getWeapons().contains("gun"))
         {
             x.addAttack(10000);
-            x.addWeapon(name);
+            x.addWeapon(new SilverBullet());
         }else{
-            x.addWeapon(name);
+            x.addWeapon(new SilverBullet());
         }
+    }
+    public void pickUp(Person x)
+    {
+        x.addWeapon(new SilverBullet());
+        x.addAttack(attack);
     }
 
 

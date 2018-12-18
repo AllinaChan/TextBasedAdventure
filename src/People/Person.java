@@ -1,8 +1,7 @@
 package People;
 
 import Game.Position;
-import Items.Trophy;
-import Items.Weapon;
+import Items.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -13,10 +12,11 @@ import java.util.ArrayList;
 public class Person {
     String Name;
     Position position;
-    ArrayList<String> keys;
-    ArrayList<String> weapons;
-    ArrayList<String> potions;
-    ArrayList<String> fragments;
+    ArrayList<Key> keys;
+    ArrayList<String> keyIDs;
+    ArrayList<Weapon> weapons;
+    ArrayList<HealingPotion> potions;
+    ArrayList<BossKeyFragment> fragments;
     Trophy trophy;
     int attack;
     int health;
@@ -37,12 +37,22 @@ public class Person {
         this.position.setY(yLoc);
     }
 
-    public ArrayList<String> getKeys() {
+    public ArrayList<Key> getKeys() {
         return keys;
     }
 
-    public void addKey(String key) {
+    public void addKey(Key key) {
         keys.add(key);
+    }
+
+    public ArrayList<String> getKeyIDs()
+    {
+        keyIDs= new ArrayList<>();
+        for(Key key: keys)
+        {
+            keyIDs.add(key.toString());
+        }
+        return keyIDs;
     }
 
     public void removeKey(String key) {
@@ -53,21 +63,21 @@ public class Person {
         return health;
     }
 
-    public void addWeapon(String name) {
-        weapons.add(name);
+    public void addWeapon(Weapon weapon) {
+        weapons.add(weapon);
     }
 
-    public ArrayList<String> getPotions() {
-        return this.potions;
+    public ArrayList<HealingPotion> getPotions() {
+        return potions;
     }
 
-    public void addPotion(String name)
+    public void addPotion(HealingPotion potion)
     {
-        potions.add(name);
+        potions.add(potion);
     }
 
-    public ArrayList<String> getWeapons() {
-        return this.weapons;
+    public ArrayList<Weapon> getWeapons() {
+        return weapons;
     }
 
     public void addHealth(int health) {
@@ -83,13 +93,13 @@ public class Person {
         return this.attack;
     }
 
-    public ArrayList<String> getFragments() {
+    public ArrayList<BossKeyFragment> getFragments() {
         return fragments;
     }
 
-    public void addFragment(String id)
+    public void addFragment(BossKeyFragment fragment)
     {
-        fragments.add(id);
+        fragments.add(fragment);
     }
 
     public void addAttack(int amount)
@@ -116,44 +126,45 @@ public class Person {
     {
         this.Name = Name;
         this.position=position;
-        this.keys=new ArrayList<>();
-        this.attack=5;
-        this.weapons=new ArrayList<>();
-        this.health= 100;
-        this.potions=new ArrayList<>();
-        this.fragments= new ArrayList<>();
-        this.trophy=null;
+        keys=new ArrayList<>();
+        attack=5;
+        weapons=new ArrayList<>();
+        health= 100;
+        potions=new ArrayList<>();
+        fragments= new ArrayList<>();
+        trophy=null;
+        keyIDs= new ArrayList<>();
     }
     public void printInv()
     {
         String keysl="";
-        for(String string: keys)
+        for(Key key: keys)
         {
-            keysl=keysl+"Key ID: "+ string+" ";
+            keysl=keysl+"Key ID: "+ key.toString()+" ";
         }
         System.out.println("You currently have the following key(s): ");
         System.out.println(keysl);
 
         String Weapon="";
-        for(String string : weapons)
+        for(Weapon weapon : weapons)
         {
-            Weapon = Weapon+ string+" ";
+            Weapon = Weapon+ weapon.toString()+" ";
         }
         System.out.println("You currently have the following weapon(s): ");
         System.out.println(Weapon);
 
         String potion="";
-        for(String string: potions)
+        for(HealingPotion potion1 : potions)
         {
-            potion=potion+ string+" ";
+            potion=potion+potion1.toString()+" ";
         }
         System.out.println("You currently have the following potion(s): ");
         System.out.println(potion);
 
         String fragmen="";
-        for(String string: fragments)
+        for(BossKeyFragment fragment: fragments)
         {
-            fragmen=fragmen+"Fragment "+ string+" ";
+            fragmen=fragmen+"Fragment "+ fragment.toString()+" ";
         }
         System.out.println("You currently have the following fragment(s): ");
         System.out.println(fragmen);

@@ -49,9 +49,7 @@ public class RoomWithHealingPotion extends Room{
         }
     }
 
-    public HealingPotion getHealingPotion() {
-        return healingPotion;
-    }
+
     public String getBroadcast()
     {
         return broadcast;

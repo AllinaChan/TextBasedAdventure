@@ -11,7 +11,7 @@ public class Key implements ConsumableItems{
     public Key()
     {
         this.id=Constants.getNextKeyID();
-        this.name="Key: " + id;
+        this.name= id;
     }
 
 
@@ -25,4 +25,8 @@ public class Key implements ConsumableItems{
     }
     public String getName() {return this.name;}
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

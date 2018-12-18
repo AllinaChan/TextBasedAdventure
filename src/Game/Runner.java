@@ -224,7 +224,7 @@ public class Runner {
                     {
                         Room currentRoom = map.getRoom(player1.getxLoc(), player1.getyLoc());
                         System.out.println("You finished drinking the Health Potion, now you are full health");
-                        //currentRoom.getHealingPotion()
+                        player1.getPotions().get(0).use(player1);
                     }
             }
         }

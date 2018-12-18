@@ -65,8 +65,8 @@ public class ItemKeyRoom extends Room {
                     response = response.toLowerCase().trim();
                 }
                 if (response.equals("yes")) {
-                    System.out.println("Key ID: " + key.getID());
-                    x.addKey(key.getID());
+                    System.out.println("The Key ID is: " + key.getID());
+                    x.addKey(key);
                     broadcast = "keyGot";
                 }
                 if (response.equals("no")) {

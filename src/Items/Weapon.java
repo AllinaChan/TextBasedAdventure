@@ -6,11 +6,7 @@ public abstract class Weapon {
     int attack;
     String name;
 
-    public void pickUp(Person x)
-    {
-        x.addWeapon(name);
-        x.addAttack(attack);
-    }
+    public abstract void pickUp(Person x);
 
     public String getName()
     {
