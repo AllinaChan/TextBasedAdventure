@@ -126,36 +126,32 @@ public class Runner {
             while (gameOn) {
                 String choices = "";
 
-                String potion="";
-                String potion1="";
-                if(player1.getPotions().contains("healPotion"))
-                {
-                    potion= " or DRINK A HEALTH POTION";
-                    potion1=" or '6' for Drinking a Health Potion";
+                String potion = "";
+                String potion1 = "";
+                if (player1.getPotions().size()>=1) {
+                    potion = " or DRINK A HEALTH POTION";
+                    potion1 = " or '6' for Drinking a Health Potion";
                 }
 
-                while (!choices.equals("1") || !choices.equals("2")|| !choices.equals("3")|| !choices.equals("4")|| !choices.equals("5")|| !choices.equals("6")) {
-                    if(choices.equals("1") || choices.equals("2") || choices.equals("3")|| choices.equals("4")|| choices.equals("5")|| choices.equals("6"))
-                    {
+                while (!choices.equals("1") || !choices.equals("2") || !choices.equals("3") || !choices.equals("4") || !choices.equals("5") || !choices.equals("6")) {
+                    if (choices.equals("1") || choices.equals("2") || choices.equals("3") || choices.equals("4") || choices.equals("5") || choices.equals("6")) {
                         break;
                     }
                     System.out.println("");
                     System.out.println("Would you like to MOVE or CHECK YOUR INVENTORY or CHECK THE MAP LEGEND or CHECK YOUR HEALTH GAUGE or CHECK THE MAP" + potion);
-                    System.out.println("type '1' for Move or '2' for Inventory Check or '3' for Legend or '4' for Health Check or '5' for Map Check"+potion1);
+                    System.out.println("type '1' for Move or '2' for Inventory Check or '3' for Legend or '4' for Health Check or '5' for Map Check" + potion1);
                     choices = in.nextLine();
                 }
-                    if (choices.equals("1")) {
-                        System.out.println("Where would you like to move? (Choose N, S, E, W)");
-                        String move = in.nextLine();
-                        Position oldPos2 = new Position(player1.getxLoc(), player1.getyLoc());
-                        Position willGoPos= directionalOffset(move, oldPos2);
-                        //Apparently, oldPos gets reset from directionalOffset, so I created a duplicate
-                        Position oldPos = new Position(player1.getxLoc(), player1.getyLoc());
-
-                        if(map.getBoard()[willGoPos.getX()][willGoPos.getY()].toString().equals("[W]"))
-                        {
-                            if(hasEnoughFrags(amountOfWolves,player1)==false)
-                            {
+                if (choices.equals("1")) {
+                    System.out.println("Where would you like to move? (Choose N, S, E, W)");
+                    String move = in.nextLine();
+                    Position oldPos2 = new Position(player1.getxLoc(), player1.getyLoc());
+                    Position willGoPos = directionalOffset(move, oldPos2);
+                    //Apparently, oldPos gets reset from directionalOffset, so I created a duplicate
+                    Position oldPos = new Position(player1.getxLoc(), player1.getyLoc());
+                    if (validMove(move, player1, map.getBoard(), "validORNah")) {
+                        if (map.getBoard()[willGoPos.getX()][willGoPos.getY()].toString().equals("[W]")) {
+                            if (hasEnoughFrags(amountOfWolves, player1) == false) {
                                 System.out.println("You don't have enough Boss Key Fragments, go kill all the wolves.");
                             } else if (validMove(move, player1, map.getBoard())) {
                                 Room currentRoom = map.getRoom(player1.getxLoc(), player1.getyLoc());
@@ -165,24 +161,17 @@ public class Runner {
                             } else {
                                 System.out.println("Please choose a valid move.");
                             }
-                        }
-
-                        else if(map.getBoard()[willGoPos.getX()][willGoPos.getY()].toString().equals("[?]"))
-                        {
-                            if(!player1.hasTrophy())
-                            {
+                        } else if (map.getBoard()[willGoPos.getX()][willGoPos.getY()].toString().equals("[?]")) {
+                            if (!player1.hasTrophy()) {
                                 System.out.println("The door is locked indefinitely, go kill the Werewolf and see if it opens then");
-                            }
-                            else if (validMove(move, player1, map.getBoard())) {
+                            } else if (validMove(move, player1, map.getBoard())) {
 
                                 Room currentRoom = map.getRoom(player1.getxLoc(), player1.getyLoc());
                                 map.print();
                             } else {
                                 System.out.println("Please choose a valid move.");
                             }
-                        }
-
-                        else if (validMove(move, player1, map.getBoard())) {
+                        } else if (validMove(move, player1, map.getBoard())) {
                             Room currentRoom = map.getRoom(player1.getxLoc(), player1.getyLoc());
                             if (currentRoom.getBroadcast().equals("sendBack")) {
                                 player1.setxLoc(oldPos.getX());
@@ -190,12 +179,10 @@ public class Runner {
                                 currentRoom.leaveRoom(player1);
                                 map.getRoom(oldPos.getX(), oldPos.getY()).enterRoom(player1);
                             }
-                            if(currentRoom.getBroadcast().equals("canKillWerewolf"))
-                            {
+                            if (currentRoom.getBroadcast().equals("canKillWerewolf")) {
                                 System.out.println("Your gun is now loaded with a silver bullet. GO KILL THAT WEREWOLF!");
                             }
-                            if(currentRoom.getBroadcast().equals("sendBackToSPAWN"))
-                            {
+                            if (currentRoom.getBroadcast().equals("sendBackToSPAWN")) {
                                 System.out.println("You woke up at the begining");
                                 currentRoom.respawn(player1);
                                 map.print();
@@ -206,27 +193,26 @@ public class Runner {
                         } else {
                             System.out.println("Please choose a valid move.");
                         }
+                    }
+                     else{
+                        System.out.println("Please choose a valid move.");
+                    }
                     } else if (choices.equals("2")) {
                         player1.printInv();
-                    } else if (choices.equals("3")){
-                        System.out.println("[X] = You"+"\n"+"[K] = Room with a KEY" +"\n"+ "[L] = Room with a lock, you can check what key ID you need by entering it"+
-                                "\n" +"[W] = Werewolf"+ "\n" +"[w] = Wolf" +"\n"+ "[G] = Gun"+"\n"+"[B] = Silver Bullet"+"\n"+ "[H] = Health Potion" +"\n"+"[S] = Sword" + "\n"+ "[-] = Starting Room");
-                    }
-                    else if(choices.equals("4"))
-                    {
-                        System.out.println("You currently have: "+player1.getHealth()+ " health points");
-                    }
-                    else if(choices.equals("5"))
-                    {
+                    } else if (choices.equals("3")) {
+                        System.out.println("[X] = You" + "\n" + "[K] = Room with a KEY" + "\n" + "[L] = Room with a lock, you can check what key ID you need by entering it" +
+                                "\n" + "[W] = Werewolf" + "\n" + "[w] = Wolf" + "\n" + "[G] = Gun" + "\n" + "[B] = Silver Bullet" + "\n" + "[H] = Health Potion" + "\n" + "[S] = Sword" + "\n" + "[-] = Starting Room");
+                    } else if (choices.equals("4")) {
+                        System.out.println("You currently have: " + player1.getHealth() + " health points");
+                    } else if (choices.equals("5")) {
                         map.print();
-                    }
-                    else if(choices.equals("6"))
-                    {
+                    } else if (choices.equals("6")) {
                         Room currentRoom = map.getRoom(player1.getxLoc(), player1.getyLoc());
                         System.out.println("You finished drinking the Health Potion, now you are full health");
-                        player1.getPotions().get(0).use(player1);
+                        player1.getPotions().get(0).use(player1, "healPotion");
                     }
-            }
+                }
+
         }
         in.close();
     }
@@ -509,6 +495,10 @@ public class Runner {
         {
             result = true;
         }
+        if (map[checkPos.getX()][checkPos.getY()].toString().equals("[?]"))
+        {
+            result = true;
+        }
         if (map[checkPos.getX()][checkPos.getY()].toString().equals("[w]"))
         {
             result = true;
@@ -591,6 +581,62 @@ public class Runner {
         return result;
     }
 
+    /**
+     * Checks that the movement chosen is within the valid game map.
+     * @param move the move chosen
+     * @param p person moving
+     * @param map the 2D array of rooms
+     * @return
+     */
+    public static boolean validMove(String move, Person p, Room[][] map,String checkIfValid)
+    {
+        move = move.toLowerCase().trim();
+        switch (move) {
+            case "n":
+                if (p.getxLoc() > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            case "e":
+                if (p.getyLoc()< map[p.getyLoc()].length -1)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            case "s":
+                if (p.getxLoc() < map.length - 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            case "w":
+                if (p.getyLoc() > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            default:
+                break;
+
+        }
+        return true;
+    }
     /**
      * Checks that the movement chosen is within the valid game map.
      * @param move the move chosen

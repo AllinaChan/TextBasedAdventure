@@ -15,9 +15,9 @@ public class Key implements ConsumableItems{
     }
 
 
-    public void use(Person x)
+    public void use(Person x, String keyID)
     {
-        x.removeKey(id);
+        x.removeKey(keyID);
     }
 
     public String getID() {

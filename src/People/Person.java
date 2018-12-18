@@ -50,13 +50,13 @@ public class Person {
         keyIDs= new ArrayList<>();
         for(Key key: keys)
         {
-            keyIDs.add(key.toString());
+            keyIDs.add(key.getID());
         }
         return keyIDs;
     }
 
-    public void removeKey(String key) {
-        keys.remove(key);
+    public void removeKey(String id) {
+        keys.remove(keys.get(keyIDs.indexOf(id)));
     }
 
     public int getHealth() {
@@ -114,12 +114,12 @@ public class Person {
 
     public void setTrophy()
     {
-        this.trophy=new Trophy();
+        trophy=new Trophy();
     }
 
-    public void removePotion(String name)
+    public void removePotion()
     {
-        this.potions.remove(name);
+        this.potions.remove(potions.get(0));
     }
 
     public Person (String Name, Position position)

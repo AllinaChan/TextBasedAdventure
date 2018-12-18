@@ -10,10 +10,17 @@ public class HealingPotion implements ConsumableItems{
     {
         this.name= "healPotion";
     }
-    public void use(Person x)
+
+    /**
+     * removes the first potion in the player inventory, because there is only one type of potions
+     * @param x
+     * @param name
+     */
+    public void use(Person x, String name)
     {
+        name= this.name;
        x.addHealth(100-x.getHealth());
-       x.removePotion(name);
+       x.removePotion();
     }
     public String getName()
     {

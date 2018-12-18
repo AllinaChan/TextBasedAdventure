@@ -38,6 +38,7 @@ public class LockedRoom extends Room {
 
         } else {
             if (x.getKeyIDs().contains(lockID)) {
+                x.getKeys().get(x.getKeyIDs().indexOf(lockID)).use(x, lockID);
                 System.out.println("-------------------------");
                 System.out.println("You have unlocked the door!");
                 broadcast = "unlocked";
