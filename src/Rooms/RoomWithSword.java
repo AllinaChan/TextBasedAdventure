@@ -28,6 +28,11 @@ public class RoomWithSword extends Room{
     @Override
     public void enterRoom(Person x) {
 
+        contain = "[X]";
+        occupant = x;
+        x.setxLoc(this.position.getX());
+        x.setyLoc(this.position.getY());
+
         if(broadcast.equals("sword"))
         {
             contain = "[X]";
@@ -70,7 +75,7 @@ public class RoomWithSword extends Room{
 
     @Override
     public String toString() {
-        return getContain();
+        return contain;
     }
 
 }

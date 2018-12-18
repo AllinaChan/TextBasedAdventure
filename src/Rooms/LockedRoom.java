@@ -25,6 +25,11 @@ public class LockedRoom extends Room {
      */
     @Override
     public void enterRoom(Person x) {
+        contain = "[X]";
+        occupant = x;
+        x.setxLoc(this.position.getX());
+        x.setyLoc(this.position.getY());
+
         if (broadcast.equals("unlocked")) {
             contain = "[X]";
             occupant = x;

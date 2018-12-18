@@ -35,6 +35,12 @@ public class RoomWithWolf extends Room{
     public void enterRoom(Person x) {
         Scanner in = new Scanner(System.in);
         String option="";
+
+        contain = "[X]";
+        occupant = x;
+        x.setxLoc(this.position.getX());
+        x.setyLoc(this.position.getY());
+
         if(broadcast.equals("wolfDied"))
         {
             contain = "[X]";
@@ -86,6 +92,7 @@ public class RoomWithWolf extends Room{
                 fragment.pickUp(x);
                 System.out.println("--Fragment Acquired--");
                 broadcast = "wolfDied";
+
             } else {
                 System.out.println("You punched the wolf with your bare hands, it barely fazed the wolf");
                 System.out.println("But the wolf left you with a grievous wound");

@@ -47,6 +47,7 @@ public abstract class Room {
     {
         return position;
     }
+
     public String getContain() {
         return contain;
     }

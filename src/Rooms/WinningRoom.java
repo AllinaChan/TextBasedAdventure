@@ -10,7 +10,7 @@ public class WinningRoom extends Room
     String broadcast;
     public WinningRoom(Position position) {
         super(position);
-        this.contain="[?]";
+        contain="[?]";
         this.broadcast="";
     }
 
@@ -31,16 +31,17 @@ public class WinningRoom extends Room
 
     }
 
+
     @Override
     public String getBroadcast() {
         return broadcast;
     }
 
-    public String getContain() {
-        return contain;
-    }
+
+
+    @Override
     public String toString() {
-        return getContain();
+        return contain;
     }
 
 }

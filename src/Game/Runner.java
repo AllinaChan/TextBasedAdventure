@@ -96,6 +96,7 @@ public class Runner {
         int randWinH=randomHeightWin(height);
         int randWinW=randomWidthWin(width);
         map.getBoard()[randWinH][randWinW] = new WinningRoom(new Position(randWinH, randWinW));
+
         map.getBoard()[randWinH][randWinW-1] = new RoomWithWerewolf(new Position(randWinH, randWinW-1));
 
         addWolfRooms(map.getBoard(),amountOfWolves,new Position(randWinH, randWinW-1));
@@ -175,7 +176,6 @@ public class Runner {
                             else if (validMove(move, player1, map.getBoard())) {
 
                                 Room currentRoom = map.getRoom(player1.getxLoc(), player1.getyLoc());
-
                                 map.print();
                             } else {
                                 System.out.println("Please choose a valid move.");

@@ -61,8 +61,9 @@ public class EmptyRoom extends Room{
     public String getContain() {
         return contain;
     }
+    @Override
     public String toString() {
-        return getContain();
+        return contain;
     }
 
 }

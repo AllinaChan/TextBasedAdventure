@@ -29,6 +29,11 @@ public class ItemKeyRoom extends Room {
      */
     @Override
     public void enterRoom(Person x) {
+        contain = "[X]";
+        occupant = x;
+        x.setxLoc(this.position.getX());
+        x.setyLoc(this.position.getY());
+
         if(broadcast.equals("keyGot"))
         {
             contain = "[X]";
@@ -96,8 +101,8 @@ public class ItemKeyRoom extends Room {
         }
 
     }
-    public String toString()
-    {
+    @Override
+    public String toString() {
         return contain;
     }
 

@@ -35,6 +35,10 @@ public class RoomWithWerewolf extends Room{
     public void enterRoom(Person x) {
         Scanner in = new Scanner(System.in);
         String option="";
+        contain = "[X]";
+        occupant = x;
+        x.setxLoc(this.position.getX());
+        x.setyLoc(this.position.getY());
 
         if(broadcast.equals("wereDead"))
         {
@@ -84,7 +88,7 @@ public class RoomWithWerewolf extends Room{
                     System.out.println("--TROPHY ACQUIRED--");
                     broadcast = "wereDead";
                     try {
-                        Thread.sleep(1500);
+                        Thread.sleep(3000);
                     } catch (InterruptedException ex) {
                         Thread.currentThread().interrupt();
                     }
@@ -176,8 +180,9 @@ public class RoomWithWerewolf extends Room{
     {
         return broadcast;
     }
+
     @Override
     public String toString() {
-        return getContain();
+        return contain;
     }
 }

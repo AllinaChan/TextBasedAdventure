@@ -26,6 +26,10 @@ public class RoomWithSilverBullet extends Room{
      */
     @Override
     public void enterRoom(Person x) {
+        contain = "[X]";
+        occupant = x;
+        x.setxLoc(this.position.getX());
+        x.setyLoc(this.position.getY());
         if (broadcast.equals("bullet")) {
 
             contain = "[X]";
@@ -53,10 +57,7 @@ public class RoomWithSilverBullet extends Room{
     {
         return broadcast;
     }
-    public String getContains()
-    {
-        return contain;
-    }
+
     /**
      * Removes the player from the room.
      *
@@ -70,6 +71,6 @@ public class RoomWithSilverBullet extends Room{
 
     @Override
     public String toString() {
-        return getContain();
+        return contain;
     }
 }
