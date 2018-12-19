@@ -11,6 +11,7 @@ public class RoomWithSilverBullet extends Room{
     String broadcast;
     String contain;
 
+    //A room containing the silver Bullet
     public RoomWithSilverBullet(Position position)
     {
         super(position);
@@ -69,6 +70,10 @@ public class RoomWithSilverBullet extends Room{
         occupant = null;
     }
 
+    /**
+     * Allows board print() to be in a readable format
+     * @return what the room contains, as a String, the symbol
+     */
     @Override
     public String toString() {
         return contain;

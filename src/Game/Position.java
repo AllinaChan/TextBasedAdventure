@@ -11,6 +11,7 @@ public class Position {
         this.yLoc = y;
     }
 
+    //Getters and setters of Position
     public int getX() {
         return xLoc;
     }
@@ -28,6 +29,9 @@ public class Position {
         yLoc= y;
     }
 
+    /**
+     * @return - The surrounding positions of a position, Northern Pos, Southern Pos, Western Pos, Easter Pos
+     */
     public ArrayList<Position> getSurroundingCardinals() {
         final ArrayList<Position> suroundingCardinals = new ArrayList<>();
         suroundingCardinals.add(new Position (xLoc-1, yLoc));
@@ -38,17 +42,24 @@ public class Position {
         return suroundingCardinals;
     }
 
+    /**
+     * @param x -The position to be checked
+     * @return boolean that verifies if one position is equal to another
+     */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object x) {
+        if (this == x) return true;
+        if (x == null || getClass() != x.getClass()) return false;
 
-        Position position = (Position) o;
+        Position position = (Position) x;
 
         if (xLoc != position.xLoc) return false;
         return yLoc == position.yLoc;
     }
 
+    /**
+     * @return The position in String form
+     */
     @Override
     public String toString() {
         return "(x:"+ getX()+", y:" + getY()+")";

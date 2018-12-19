@@ -12,6 +12,7 @@ public class RoomWithSword extends Room{
     String broadcast;
     String contain;
 
+    //A room containing the sword
     public RoomWithSword(Position position)
     {
         super(position);
@@ -73,6 +74,10 @@ public class RoomWithSword extends Room{
         return contain;
     }
 
+    /**
+     * Allows board print() to be in a readable format
+     * @return what the room contains, as a String, the symbol
+     */
     @Override
     public String toString() {
         return contain;

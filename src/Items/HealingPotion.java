@@ -13,8 +13,8 @@ public class HealingPotion implements ConsumableItems{
 
     /**
      * removes the first potion in the player inventory, because there is only one type of potions
-     * @param x
-     * @param name
+     * @param x - Player
+     * @param name - name of the potion
      */
     public void use(Person x, String name)
     {

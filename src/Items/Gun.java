@@ -10,9 +10,13 @@ public class Gun extends Weapon{
         name="gun";
     }
 
+    /**
+     * IF the player already have the silverBullet in their inventory, then they gain enough attack to kill the Werewolf
+     * @param x - Player picking the item up
+     */
     public void fusionPickUp(Person x)
     {
-        if(x.getWeapons().contains("gun"))
+        if(x.getWeaponNames().contains("silverBullet"))
         {
             x.addAttack(10000);
             x.addWeapon(new Gun());

@@ -56,19 +56,33 @@ public class Board
         return this.map;
     }
 
+    /**
+     * @param y - y-coordinate of Position
+     * @param x - x-coordinate of Position
+     * @param room - type of room
+     */
     public void setBoard(int y, int x, Room room)
     {
         this.map[y][x] = room;
     }
 
+    /**
+     * @return - Get the height of the map
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * @return - Get the width of the map
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * Prints the board
+     */
     public void print()
     {
         String result="";
@@ -82,6 +96,12 @@ public class Board
             System.out.println(result);
         }
     }
+
+    /**
+     * @param xPos - xPosition of the room
+     * @param yPos - yPosition of the room
+     * @return - The room at the position
+     */
     public Room getRoom(int xPos, int yPos)
     {
         Room result= null;

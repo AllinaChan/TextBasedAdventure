@@ -10,6 +10,7 @@ public class LockedRoom extends Room {
    String lockID;
    String broadcast;
 
+   //A locked room that requires a key to open
     public LockedRoom(Position position)
     {
         super(position);
@@ -83,6 +84,10 @@ public class LockedRoom extends Room {
         }
     }
 
+    /**
+     * Allows board print() to be in a readable format
+     * @return what the room contains, as a String, the symbol
+     */
     @Override
     public String toString()
     {

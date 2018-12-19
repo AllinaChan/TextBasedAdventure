@@ -14,6 +14,7 @@ public class ItemKeyRoom extends Room {
     String id;
     String broadcast;
 
+    //An item that contains a key
     public ItemKeyRoom(Position position)
     {
      super(position);
@@ -78,7 +79,7 @@ public class ItemKeyRoom extends Room {
     }
 
 
-
+    //Getters for contain and broadcast
     public String getContain() {
         return contain;
     }
@@ -101,6 +102,11 @@ public class ItemKeyRoom extends Room {
         }
 
     }
+
+    /**
+     * Allows board print() to be in a readable format
+     * @return what the room contains, as a String, the symbol
+     */
     @Override
     public String toString() {
         return contain;

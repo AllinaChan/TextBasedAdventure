@@ -15,12 +15,29 @@ public class Person {
     ArrayList<Key> keys;
     ArrayList<String> keyIDs;
     ArrayList<Weapon> weapons;
+    ArrayList<String> weaponNames;
     ArrayList<HealingPotion> potions;
     ArrayList<BossKeyFragment> fragments;
     Trophy trophy;
     int attack;
     int health;
 
+    public Person (String Name, Position position)
+    {
+        this.Name = Name;
+        this.position=position;
+        keys=new ArrayList<>();
+        attack=5;
+        weapons=new ArrayList<>();
+        health= 100;
+        potions=new ArrayList<>();
+        fragments= new ArrayList<>();
+        trophy=null;
+        keyIDs= new ArrayList<>();
+        weaponNames= new ArrayList<>();
+    }
+
+    //GETTERS AND SETTERS FOR EACH FIELD
     public int getxLoc() {
         return position.getX();
     }
@@ -65,6 +82,16 @@ public class Person {
 
     public void addWeapon(Weapon weapon) {
         weapons.add(weapon);
+    }
+
+    public ArrayList<String> getWeaponNames()
+    {
+        weaponNames= new ArrayList<>();
+        for (Weapon weapon: weapons)
+        {
+            weaponNames.add(weapon.toString());
+        }
+        return weaponNames;
     }
 
     public ArrayList<HealingPotion> getPotions() {
@@ -122,19 +149,10 @@ public class Person {
         this.potions.remove(potions.get(0));
     }
 
-    public Person (String Name, Position position)
-    {
-        this.Name = Name;
-        this.position=position;
-        keys=new ArrayList<>();
-        attack=5;
-        weapons=new ArrayList<>();
-        health= 100;
-        potions=new ArrayList<>();
-        fragments= new ArrayList<>();
-        trophy=null;
-        keyIDs= new ArrayList<>();
-    }
+
+    /**
+     * Prints the entire player inventory in an readable way
+     */
     public void printInv()
     {
         String keysl="";

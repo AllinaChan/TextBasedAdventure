@@ -8,6 +8,8 @@ public class WinningRoom extends Room
 {
     String contain;
     String broadcast;
+
+    //The escape
     public WinningRoom(Position position) {
         super(position);
         contain="[?]";

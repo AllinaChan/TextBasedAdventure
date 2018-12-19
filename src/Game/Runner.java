@@ -131,6 +131,7 @@ public class Runner {
             while (gameOn) {
                 String choices = "";
 
+                //Adds an additional choice if the player picked up a Potion
                 String potion = "";
                 String potion1 = "";
                 if (player1.getPotions().size()>=1) {
@@ -154,7 +155,10 @@ public class Runner {
                     Position willGoPos = directionalOffset(move, oldPos2);
                     //Apparently, oldPos gets reset from directionalOffset, so I created a duplicate
                     Position oldPos = new Position(player1.getxLoc(), player1.getyLoc());
+
                     if (validMove(move, player1, map.getBoard(), "validORNah")) {
+
+                        //If play is going to fight Werewolf, then check if the player has enough fragments
                         if (map.getBoard()[willGoPos.getX()][willGoPos.getY()].toString().equals("[W]")) {
                             if (hasEnoughFrags(amountOfWolves, player1) == false) {
                                 System.out.println("You don't have enough Boss Key Fragments, go kill all the wolves.");
@@ -649,7 +653,7 @@ public class Runner {
     }
 
     /**
-     * Checks that the movement chosen is within the valid game map.
+     * Checks that the movement chosen is within the valid game map. An overloaded method
      * @param move the move chosen
      * @param p person moving
      * @param map the 2D array of rooms

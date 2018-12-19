@@ -8,6 +8,7 @@ public class EmptyRoom extends Room{
     String[] clues;
     String contain;
 
+    // A room that just acts as a place holder
     public EmptyRoom(Position position)
     {
         super(position);
@@ -30,6 +31,7 @@ public class EmptyRoom extends Room{
         x.setyLoc(this.position.getY());
         contain= "[X]";
         System.out.println("-------------------------");
+        //Gets a random tip from the clues array to not have nothing be print
         System.out.println(this.clues[(int)(Math.random()*clues.length)]);
 
     }

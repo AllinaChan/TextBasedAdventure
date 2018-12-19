@@ -39,10 +39,16 @@ public abstract class Room {
         this.contain="[ ]";
     }
 
+    /**
+     * Allows board print() to be in a readable format
+     * @return what the room contains, as a String, the symbol
+     */
     public String toString()
     {
         return getContain();
     }
+
+    //Getters of Position of the room, the String contain, and the String broadcast
     public Position getPosition()
     {
         return position;
@@ -57,6 +63,7 @@ public abstract class Room {
         return broadcast;
     }
 
+    //If the player dies, then the player respawns at (0,0). Used by RoomWithWerewolf and RoomWithWolf
     public void respawn(Person x)
     {
         occupant = x;

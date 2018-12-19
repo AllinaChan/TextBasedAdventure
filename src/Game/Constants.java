@@ -7,6 +7,7 @@ public class Constants {
     public static int lockID=-1;
     public static int fragmentID=0;
 
+//All the following methods, just increments the IDs by one
 
     public static String getNextKeyID()
     {

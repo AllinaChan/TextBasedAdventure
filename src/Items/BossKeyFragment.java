@@ -11,10 +11,17 @@ public class BossKeyFragment  {
         this.id= Constants.getNextFragmentID();
     }
 
+    /**
+     * @param x - Person that picks up the fragment
+     */
     public void pickUp(Person x)
     {
         x.addFragment(new BossKeyFragment());
     }
+
+    /**
+     * @return id of key Fragment
+     */
     public String toString() {
         return id;
     }

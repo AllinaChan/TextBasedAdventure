@@ -17,6 +17,7 @@ public class RoomWithWerewolf extends Room{
     String contain;
     Trophy trophy;
 
+    //A room containing the Werewolf
     public RoomWithWerewolf(Position position)
     {
         super(position);
@@ -60,9 +61,12 @@ public class RoomWithWerewolf extends Room{
             if (option.equals("flee")) {
                 if (x.getAttack() >= 10000) {
                     System.out.println("WHY DID YOU RUN??? YOU COULD'VE KILLED THAT MONSTER!");
+                    broadcast = "sendBack";
+                    contain="[W]";
                 } else {
                     System.out.println("oof! that was a close call, you should find the GUN and the SILVER BULLET before fighting that thing");
                     broadcast = "sendBack";
+                    contain="[W]";
                 }
             }
             if (option.equals("attack")) {
@@ -86,6 +90,7 @@ public class RoomWithWerewolf extends Room{
                     System.out.println("The SILVER BULLET pierced through the werewolf's heart");
                     System.out.println("You walked up to the werewolf and severed its head");
                     System.out.println("--TROPHY ACQUIRED--");
+                    x.setTrophy();
                     broadcast = "wereDead";
                     try {
                         Thread.sleep(3000);
@@ -163,12 +168,17 @@ public class RoomWithWerewolf extends Room{
     /**
      * Removes the player from the room.
      *
-     * @param x
+     * @param x- player
      */
     @Override
     public void leaveRoom(Person x) {
+
         contain="[ ]";
         occupant = null;
+        if(broadcast.equals("sendBack"))
+        {
+            contain = "[W]";
+        }
     }
 
     @Override
@@ -181,6 +191,10 @@ public class RoomWithWerewolf extends Room{
         return broadcast;
     }
 
+    /**
+     * Allows board print() to be in a readable format
+     * @return what the room contains, as a String, the symbol
+     */
     @Override
     public String toString() {
         return contain;

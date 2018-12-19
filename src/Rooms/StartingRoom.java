@@ -8,6 +8,8 @@ public class StartingRoom extends Room
 {
     String contain;
     String broadcast;
+
+    //The room in which is treated like the lobby
     public StartingRoom(Position position) {
         super(position);
         this.contain="[X]";

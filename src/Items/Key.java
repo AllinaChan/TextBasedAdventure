@@ -15,6 +15,11 @@ public class Key implements ConsumableItems{
     }
 
 
+    /**
+     * Uses the key and then remove it from the player inventory since its a consumable
+     * @param x - player
+     * @param keyID - int of the keyId to use
+     */
     public void use(Person x, String keyID)
     {
         x.removeKey(keyID);

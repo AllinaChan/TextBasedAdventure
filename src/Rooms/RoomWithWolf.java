@@ -17,6 +17,7 @@ public class RoomWithWolf extends Room{
     String contain;
     BossKeyFragment fragment;
 
+    //A room with a wolf
     public RoomWithWolf(Position position)
     {
         super(position);
@@ -63,11 +64,15 @@ public class RoomWithWolf extends Room{
         {
             if(x.getAttack()>=25)
             {
+                System.out.println("The wolf tried to scratch you, but you blocked it with your sword...Wait... ");
                 System.out.println("You had a sword for a reason...Go back and fight it");
+                broadcast="sendBack";
+                contain="[w]";
             }else {
                 System.out.println("You sprinted out of the room, but the wolf still scratched you");
                 x.removeHealth(10);
                 broadcast="sendBack";
+                contain="[w]";
             }
             if(x.getHealth()<=0)
             {
@@ -92,11 +97,14 @@ public class RoomWithWolf extends Room{
                 fragment.pickUp(x);
                 System.out.println("--Fragment Acquired--");
                 broadcast = "wolfDied";
+                this.contain="[X]";
 
             } else {
                 System.out.println("You punched the wolf with your bare hands, it barely fazed the wolf");
                 System.out.println("But the wolf left you with a grievous wound");
                 wolf.attack(x);
+                broadcast="sendBack";
+                contain="[w]";
             }
             if (x.getHealth() <= 0) {
                 System.out.println("YOU HAVE DIED...Respawning...");
@@ -125,11 +133,20 @@ public class RoomWithWolf extends Room{
     public void leaveRoom(Person x) {
         contain="[ ]";
         occupant = null;
+        if(broadcast.equals("sendBack"))
+        {
+            contain = "[w]";
+        }
     }
     public String getContains()
     {
         return contain;
     }
+
+    /**
+     * Allows board print() to be in a readable format
+     * @return what the room contains, as a String, the symbol
+     */
     @Override
     public String toString() {
         return contain;
